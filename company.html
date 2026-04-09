@@ -103,11 +103,11 @@
 
     <!-- Home -->
     <div id="home" class="section">
-        <button onclick="sayHello()">Click Me</button>
+        <button onclick="changeText()">Click Me</button>
         <!-- ✅ PHOTO -->
         <img src="IMG_20260114_184620_617.webp" width="120" style="border-radius:50%;">
         
-        <h1>Welcome to My Company</h1>
+        <h1 id="title">Welcome to My Company</h1>
         <p>This is my business website.</p>
     </div>
 
@@ -140,11 +140,11 @@
             <button>Chat on WhatsApp</button>
         </a>
     </div>
-    <script>
-function sayHello() {
-    alert("Hello Adarsh 🚀");
+<script>
+function changeText() {
+    document.getElementById("title").innerText = "Welcome Adarsh 😎";
 }
-    </script>
+</script>
 
 </body>
 </html>
