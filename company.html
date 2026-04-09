@@ -109,6 +109,7 @@
     <!-- Home -->
     <div id="home" class="section">
         <input type="text" id="nameInput" placeholder="Adarsh😎">
+        <p id="error" style="color:red;"></p>
         <button onclick="showName()">Click Me</button>
         <button onclick="toggleDark()">Dark Mode</button>
         <!-- ✅ PHOTO -->
@@ -147,12 +148,19 @@
             <button>Chat on WhatsApp</button>
         </a>
     </div>
-<script>
+    <script>
 function showName() {
     var name = document.getElementById("nameInput").value;
-    document.getElementById("title").innerText = "Welcome " + Adarsh + " 😎";
+
+    if(name === "") {
+        document.getElementById("error").innerText = "Adarsh";
+    } else {
+        document.getElementById("error").innerText = "";
+        document.getElementById("title").innerText = "Welcome " + Adarsh + " 😎";
+    }
 }
-</script>
+    </script>
+
     <script>
 function toggleDark() {
     document.body.classList.toggle("dark");
