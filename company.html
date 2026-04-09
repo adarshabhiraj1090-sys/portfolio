@@ -103,7 +103,8 @@
 
     <!-- Home -->
     <div id="home" class="section">
-        <button onclick="changeText()">Click Me</button>
+        <input type="text" id="nameInput" placeholder="Enter your name">
+        <button onclick="showName()">Click Me</button>
         <!-- ✅ PHOTO -->
         <img src="IMG_20260114_184620_617.webp" width="120" style="border-radius:50%;">
         
@@ -141,8 +142,9 @@
         </a>
     </div>
 <script>
-function changeText() {
-    document.getElementById("title").innerText = "Welcome Adarsh 😎";
+function showName() {
+    var name = document.getElementById("nameInput").value;
+    document.getElementById("title").innerText = "Welcome " + name + " 😎";
 }
 </script>
 
