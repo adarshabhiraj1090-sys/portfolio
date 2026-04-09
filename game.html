@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Number Guess Game</title>
+
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      background: #222;
+      color: white;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      background: orange;
+      color: black;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🎮 Number Guess Game</h1>
+  <p>Guess a number between 1 to 10</p>
+
+  <input type="number" id="guess">
+  <button onclick="checkGuess()">Check</button>
+
+  <p id="result"></p>
+
+  <script>
+    let randomNumber = Math.floor(Math.random() * 10) + 1;
+
+    function checkGuess() {
+      let userGuess = document.getElementById("guess").value;
+
+      if (userGuess == randomNumber) {
+        document.getElementById("result").innerText = "🎉 Correct!";
+      } else {
+        document.getElementById("result").innerText = "❌ Wrong! Try again.";
+      }
+    }
+  </script>
+
+</body>
+</html>
