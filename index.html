@@ -1,98 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Adarsh Portfolio</title>
-    <style>
-        a {
-    display: inline-block;
-    padding: 12px 20px;
-    background: black;
-    color: white;
-    text-decoration: none;
-    margin: 10px;
-    border-radius: 5px;
-        }
-        a:hover {
-    background: red;
-        }
-        h2 {
-    text-align: center;
-    color: black;
-        }
-        </style>
-        body {
-            font-family: Arial;
-            margin: 0;
-            background: #f4f4f4;
-        }
-        .header {
-            background: black;
-            color: white;
-            text-align: center;
-            padding: 30px;
-        }
-        .section {
-            background: white;
-            margin: 20px;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        .footer {
-            background: black;
-            color: white;
-            text-align: center;
-            padding: 10px;
-        }
-    </style>
-</head>
-<body>
+    </div>
+    <script>
+function showName() {
+    var name = document.getElementById("nameInput").value;
 
-<div class="header">
-    <h1>Adarsh Kumar</h1>
-    <p>Web Developer | Programmer</p>
-</div>
+    if(name === "") {
+        document.getElementById("error").innerText = "Adarsh";
+    } else {
+        document.getElementById("error").innerText = "";
+        document.getElementById("title").innerText = "Welcome " + Adarsh + " 😎";
+    }
+}
+    </script>
 
-<div class="section">
-    <h2>About Me</h2>
-    <p>I am learning web development and coding. I want to become a software developer.</p>
-</div>
-
-<div class="section">
-    <h2>My Skills</h2>
-    <ul>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>JavaScript</li>
-        <li>C++</li>
-    </ul>
-</div>
-
-<div class="section">
-    <h2>My Projects</h2>
-    <p>Portfolio Website</p>
-    <p>Calculator (Coming Soon)</p>
-    <p>Login Page (Coming Soon)</p>
-</div>
-
-<div class="section">
-    <h2>Contact</h2>
-    <p>Email: your@email.com</p>
-</div>
-
-<div class="footer">
-    <p>© 2026 Adarsh Kumar</p>
-</div>
+    <script>
+function toggleDark() {
+    document.body.classList.toggle("dark");
+}
+    </script>
 
 </body>
 </html>
-<h2>My Projects</h2>
-
-<p>Calculator Website</p>
-<a href="calculator.html">Open Calculator</a>
-
-<p>Login Page</p>
-<a href="login.html">Open Login Page</a>
-
-<p>To Do List</p>
-<a href="todo.html">Open To Do List</a>
-
