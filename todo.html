@@ -56,11 +56,21 @@ function showTasks() {
             <span class="${t.done ? 'done' : ''}" onclick="toggle(${i})">
                 ${t.text}
             </span>
+            <button onclick="editTask(${i})">✏️</button>
             <button onclick="deleteTask(${i})">❌</button>
         </li>`;
     });
 }
-
+     function editTask(i) {
+    let newTask = prompt("Edit your task:", tasks[i].text);
+    
+    if (newTask !== null && newTask.trim() !== "") {
+        tasks[i].text = newTask.trim();
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        showTasks();
+    }
+     }
+    
     function toggle(i) {
     tasks[i].done = !tasks[i].done;
     localStorage.setItem("tasks", JSON.stringify(tasks));
