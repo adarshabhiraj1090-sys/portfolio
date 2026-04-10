@@ -21,6 +21,15 @@
         li {
             margin: 10px;
         }
+        
+        .done {
+    text-decoration: line-through;
+    color: gray;
+}
+
+span {
+    cursor: pointer;
+}
     </style>
 </head>
 
@@ -42,15 +51,27 @@ function showTasks() {
     list.innerHTML = "";
 
     tasks.forEach((t, i) => {
-        list.innerHTML += `<li>${t} <button onclick="deleteTask(${i})">❌</button></li>`;
+        list.innerHTML += `
+        <li>
+            <span class="${t.done ? 'done' : ''}" onclick="toggle(${i})">
+                ${t.text}
+            </span>
+            <button onclick="deleteTask(${i})">❌</button>
+        </li>`;
     });
 }
 
+    function toggle(i) {
+    tasks[i].done = !tasks[i].done;
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    showTasks();
+    }
+    
 function addTask() {
     let task = document.getElementById("task").value.trim();
     if (task === "") return;
 
-    tasks.push(task);
+    tasks.push({text: task, done: false});
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
     document.getElementById("task").value = "";
