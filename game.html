@@ -33,20 +33,36 @@
 
   <input type="number" id="guess">
   <button onclick="checkGuess()">Check</button>
+  <button onclick="resetGame()">Reset</button>
 
   <p id="result"></p>
+  <p id="attempts"></p>
 
   <script>
     let randomNumber = Math.floor(Math.random() * 10) + 1;
+    let count = 0;
 
     function checkGuess() {
       let userGuess = document.getElementById("guess").value;
+      count++;
 
       if (userGuess == randomNumber) {
         document.getElementById("result").innerText = "🎉 Correct!";
+      } else if (userGuess > randomNumber) {
+        document.getElementById("result").innerText = "📉 Too High!";
       } else {
-        document.getElementById("result").innerText = "❌ Wrong! Try again.";
+        document.getElementById("result").innerText = "📈 Too Low!";
       }
+
+      document.getElementById("attempts").innerText = "Attempts: " + count;
+    }
+
+    function resetGame() {
+      randomNumber = Math.floor(Math.random() * 10) + 1;
+      count = 0;
+      document.getElementById("result").innerText = "";
+      document.getElementById("attempts").innerText = "";
+      document.getElementById("guess").value = "";
     }
   </script>
 
