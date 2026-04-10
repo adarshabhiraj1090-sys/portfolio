@@ -1,182 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Company</title>
+    <title>My Portfolio</title>
 
     <style>
-        .dark {
-    background: black;
-    color: white;
-        }
-        .project-btn {
-  display: block;
-  margin: 10px auto;
-  width: 200px;
-        }
-        <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             font-family: Arial;
-            margin: 0;
-            background: #f4f4f4;
-        }
-
-        .navbar {
-            background: black;
-            padding: 15px;
             text-align: center;
-            position: sticky;
-            top: 0;
         }
 
-        .navbar a {
-            color: white;
+        .box {
+            margin-top: 50px;
+        }
+
+        a {
+            display: block;
             margin: 10px;
+            font-size: 20px;
             text-decoration: none;
-            font-size: 18px;
-        }
-
-        .navbar a:hover {
-            color: yellow;
-        }
-
-        .section {
-            padding: 100px 20px;
-            text-align: center;
-            background: white;
-            margin: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px gray;
-        }
-
-        .section:hover {
-            transform: scale(1.02);
-            transition: 0.3s;
-        }
-
-        h1, h2 {
-            color: black;
-        }
-
-        button {
-            padding: 10px 20px;
-            background: black;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-
-        button:hover {
-            background: red;
-        }
-
-        img {
-            margin-bottom: 10px;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 600px) {
-            .navbar a {
-                display: block;
-                margin: 10px 0;
-                font-size: 16px;
-            }
-
-            .section {
-                padding: 60px 10px;
-                margin: 10px;
-            }
-
-            h1 {
-                font-size: 24px;
-            }
-
-            h2 {
-                font-size: 20px;
-            }
+            color: blue;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <div class="navbar">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </div>
+<div class="box">
+    <h1>Welcome Adarsh 🚀</h1>
+    <p>My Projects</p>
 
-    <!-- Home -->
-    <div id="home" class="section">
-        <input type="text" id="nameInput" placeholder="Adarsh😎">
-        <p id="error" style="color:red;"></p>
-        <button onclick="showName()">Click Me</button>
-        <button onclick="toggleDark()">Dark Mode</button>
-        <!-- ✅ PHOTO -->
-        <img src="IMG_20260114_184620_617.webp" width="120" style="border-radius:50%;">
-        
-        <h1 id="title">Welcome to My Company</h1>
-        hi,I am adarsh
-        <p>This is my business website.</p>
-    </div>
-
-    <!-- About -->
-    <div id="about" class="section">
-        <h2>About Us</h2>
-        <p>We provide best services.</p>
-        <p>I am a beginner web developer from India. I love coding and building projects.</p>
-    </div>
-
-    <!-- Projects -->
-    <div id="projects" class="section">
-        <h2>My Projects</h2>
-        <p><a href="calculator.html">Calculator</a></p>
-        <a class="project-btn" href="login.html">Login Page</a>
-        <p><a href="todo.html">Todo App</a></p>
-        <a class="project-btn" href="clock.html">Digital Clock</a>
-        <a class="project-btn" href="color.html">Color Changer</a>
-
-        <a class="project-btn" href="game.html">Number Game</a>
-    </div>
-
-    <!-- Contact -->
-    <div id="contact" class="section">
-        <h2>Contact</h2>
-        <p>Email: adarshabhiraj1090@gmail.com</p>
-
-        <!-- Hire Me -->
-        <a href="mailto:adarshabhiraj1090@gmail.com">
-            <button>Hire Me</button>
-        </a>
-
-        <!-- WhatsApp -->
-        <a href="https://wa.me/91XXXXXXXXXX" target="_blank">
-            <button>Chat on WhatsApp</button>
-        </a>
-    </div>
-    <script>
-function showName() {
-    var name = document.getElementById("nameInput").value;
-
-    if(name === "") {
-        document.getElementById("error").innerText = "Adarsh";
-    } else {
-        document.getElementById("error").innerText = "";
-        document.getElementById("title").innerText = "Welcome " + Adarsh + " 😎";
-    }
-}
-    </script>
-
-    <script>
-function toggleDark() {
-    document.body.classList.toggle("dark");
-}
-    </script>
+    <a href="login.html">Login System</a>
+    <a href="todo.html">Todo App</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="game.html">Game</a>
+</div>
 
 </body>
 </html>
