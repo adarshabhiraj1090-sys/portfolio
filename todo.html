@@ -1,74 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Todo App</title>
+    <title>Todo App</title>
 
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      background: #222;
-      color: white;
-    }
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
 
-    input {
-      padding: 10px;
-      width: 200px;
-    }
+        input {
+            padding: 8px;
+            width: 200px;
+        }
 
-    button {
-      padding: 10px;
-      margin: 5px;
-      cursor: pointer;
-    }
+        button {
+            padding: 8px;
+        }
 
-    li {
-      list-style: none;
-      margin: 10px;
-    }
-
-    .done {
-      text-decoration: line-through;
-      color: gray;
-    }
-  </style>
+        li {
+            margin: 10px;
+        }
+    </style>
 </head>
 
 <body>
 
-  <h1>📋 Todo App</h1>
+<h2>Todo App</h2>
 
-  <input type="text" id="taskInput" placeholder="Enter task">
-  <button onclick="addTask()">Add</button>
+<input type="text" id="task">
+<button onclick="addTask()">Add</button>
 
-  <ul id="taskList"></ul>
+<ul id="list"></ul>
 
-  <script>
-    function addTask() {
-      let taskInput = document.getElementById("taskInput");
-      let taskText = taskInput.value;
+<script>
 
-      if (taskText === "") return;
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-      let li = document.createElement("li");
-      li.innerText = taskText;
+function showTasks() {
+    let list = document.getElementById("list");
+    list.innerHTML = "";
 
-      li.onclick = function() {
-        li.classList.toggle("done");
-      };
+    tasks.forEach((t, i) => {
+        list.innerHTML += `<li>${t} <button onclick="deleteTask(${i})">❌</button></li>`;
+    });
+}
 
-      let delBtn = document.createElement("button");
-      delBtn.innerText = "❌";
-      delBtn.onclick = function() {
-        li.remove();
-      };
+function addTask() {
+    let task = document.getElementById("task").value.trim();
+    if (task === "") return;
 
-      li.appendChild(delBtn);
-      document.getElementById("taskList").appendChild(li);
+    tasks.push(task);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 
-      taskInput.value = "";
-    }
-  </script>
+    document.getElementById("task").value = "";
+    showTasks();
+}
+
+function deleteTask(i) {
+    tasks.splice(i, 1);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    showTasks();
+}
+
+showTasks();
+
+</script>
 
 </body>
 </html>
