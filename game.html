@@ -61,10 +61,6 @@
       document.getElementById("attempts").innerText = "Attempts: " + count;
     }
 
-    if (count >= 5 && userGuess != randomNumber) {
-  document.getElementById("result").innerText = "💀 Game Over!";
-    }
-
     function resetGame() {
       randomNumber = Math.floor(Math.random() * 10) + 1;
       count = 0;
