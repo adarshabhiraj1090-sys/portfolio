@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home Page</title>
+    <title>Home</title>
 </head>
 <body style="text-align:center; font-family:Arial;">
 
-    <h1>Welcome Admin 🎉</h1>
-    <p>Login successful ho gaya 👍</p>
+    <h1 id="welcome"></h1>
+
+    <button onclick="logout()">Logout</button>
+
+    <script>
+        let name = localStorage.getItem("username");
+        document.getElementById("welcome").innerText = "Welcome " + name;
+
+        function logout() {
+            localStorage.removeItem("username");
+            window.location.href = "login.html";
+        }
+    </script>
 
 </body>
 </html>
