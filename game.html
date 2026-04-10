@@ -43,6 +43,10 @@
     let count = 0;
 
     function checkGuess() {
+      if (count >= 5) {
+  document.getElementById("result").innerText = "💀 Game Over! Press Reset";
+  return;
+      }
       let userGuess = document.getElementById("guess").value;
       count++;
 
