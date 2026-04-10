@@ -37,6 +37,8 @@ span {
 
 <h2>Todo App</h2>
 
+<input type="text" id="search" placeholder="Search task" onkeyup="searchTask()">
+
 <input type="text" id="task">
 <button onclick="addTask()">Add</button>
 
@@ -93,6 +95,16 @@ function deleteTask(i) {
     localStorage.setItem("tasks", JSON.stringify(tasks));
     showTasks();
 }
+
+function searchTask() {
+    let value = document.getElementById("search").value.toLowerCase();
+    let list = document.getElementById("list").getElementsByTagName("li");
+
+    for (let i = 0; i < list.length; i++) {
+        let text = list[i].innerText.toLowerCase();
+        list[i].style.display = text.includes(value) ? "" : "none";
+    }
+}    
 
 showTasks();
 
