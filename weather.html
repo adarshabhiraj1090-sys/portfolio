@@ -43,7 +43,7 @@
 async function getWeather() {
   let city = document.getElementById("city").value;
 
-  let apiKey = "YOUR_API_KEY"; // yaha apni key daalna
+  let apiKey = "12d5efc1b3d470e90a7f605476dd9c3c"; 
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
   let res = await fetch(url);
