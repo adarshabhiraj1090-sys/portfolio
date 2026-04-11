@@ -57,6 +57,7 @@ button {
     <button onclick="getWeather()">Get Weather</button>
 
     <h2 id="result"></h2>
+    <div id="forecast"></div>
 </div>
 
 </body>
@@ -105,6 +106,26 @@ else {
 
                 document.getElementById("result").innerHTML =
                     `${icon} ${data.name} <br> 🌡️ Temp: ${data.main.temp}°C <br> ☁️ ${weather}`;
+                let forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+
+let forecastRes = await fetch(forecastUrl);
+let forecastData = await forecastRes.json();
+
+let forecastHTML = "<h3>5-Day Forecast</h3>";
+
+for (let i = 0; i < forecastData.list.length; i += 8) {
+    let day = forecastData.list[i];
+
+    forecastHTML += `
+        <p>
+        📅 ${day.dt_txt.split(" ")[0]} <br>
+        🌡️ ${day.main.temp}°C <br>
+        ☁️ ${day.weather[0].main}
+        </p>
+    `;
+}
+
+document.getElementById("forecast").innerHTML = forecastHTML;
 
             } else {
                 document.getElementById("result").innerHTML = "⏳ Loading...";
