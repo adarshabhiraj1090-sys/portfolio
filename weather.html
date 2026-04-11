@@ -74,27 +74,30 @@ button {
 
             if (data.cod == 200) {
 
-                let weather = data.weather[0].main;
-                let icon = "";
+     let weather = data.weather[0].main;
+let icon = "";
 
-                // 🌦️ Icon set
-                if (weather == "Clear") icon = "☀️";
-                else if (weather == "Clouds") icon = "☁️";
-                else if (weather == "Rain") icon = "🌧️";
-                else if (weather == "Smoke") icon = "🌫️";
-                else if (weather == "Haze") icon = "🌁";
-                else icon = "🌍";
-
-                // 🎨 Background change
-                if (weather == "Clear") {
-                    document.body.style.background = "orange";
-                } else if (weather == "Clouds") {
-                    document.body.style.background = "gray";
-                } else if (weather == "Rain") {
-                    document.body.style.background = "darkblue";
-                } else {
-                    document.body.style.background = "#74ebd5";
-                }
+// 🌤️ Icon
+if (weather == "Clear") {
+    icon = "☀️";
+    document.body.style.background = "linear-gradient(to right, #fceabb, #f8b500)";
+}
+else if (weather == "Clouds") {
+    icon = "☁️";
+    document.body.style.background = "linear-gradient(to right, #bdc3c7, #2c3e50)";
+}
+else if (weather == "Rain") {
+    icon = "🌧️";
+    document.body.style.background = "linear-gradient(to right, #4b6cb7, #182848)";
+}
+else if (weather == "Smoke") {
+    icon = "🌫️";
+    document.body.style.background = "linear-gradient(to right, #757f9a, #d7dde8)";
+}
+else {
+    icon = "🌍";
+    document.body.style.background = "linear-gradient(to right, #74ebd5, #ACB6E5)";
+}
 
                 document.getElementById("result").innerHTML =
                     `${icon} ${data.name} <br> 🌡️ Temp: ${data.main.temp}°C <br> ☁️ ${weather}`;
