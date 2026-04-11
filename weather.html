@@ -63,80 +63,82 @@ button {
 </body>
 
     <script>
-        async function getWeather() {
-            let city = document.getElementById("city").value.trim();
+async function getWeather() {
+    let city = document.getElementById("city").value.trim();
+    let apiKey = "12d5efc1b3d470e90a7f605476dd9c3c";
 
-            let apiKey = "12d5efc1b3d470e90a7f605476dd9c3c";
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-            let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    let response = await fetch(url);
+    let data = await response.json();
 
-            let response = await fetch(url);
-            let data = await response.json();
+    if (data.cod == 200) {
 
-            if (data.cod == 200) {
+        let weather = data.weather[0].main;
+        let icon = "";
 
-     let weather = data.weather[0].main;
-let icon = "";
-
-// 🌤️ Icon
-if (weather == "Clear") {
-    icon = "☀️";
-    document.body.style.background = "linear-gradient(to right, #fceabb, #f8b500)";
-}
-else if (weather == "Clouds") {
-    icon = "☁️";
-    document.body.style.background = "linear-gradient(to right, #bdc3c7, #2c3e50)";
-}
-else if (weather == "Rain") {
-    icon = "🌧️";
-    document.body.style.background = "linear-gradient(to right, #4b6cb7, #182848)";
-}
-else if (weather == "Smoke") {
-    icon = "🌫️";
-    document.body.style.background = "linear-gradient(to right, #757f9a, #d7dde8)";
-}
- else if (weather == "Haze") {
-    icon = "🌁";
-    document.body.style.background = "linear-gradient(to right, #a1c4fd, #c2e9fb)";
- }
-else {
-    icon = "🌍";
-    document.body.style.background = "linear-gradient(to right, #74ebd5, #ACB6E5)";
-}
-
-                document.getElementById("result").innerHTML =
-                    `${icon} ${data.name} <br> 🌡️ Temp: ${data.main.temp}°C <br> ☁️ ${weather}`;
-                let forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
-
-let forecastRes = await fetch(forecastUrl);
-let forecastData = await forecastRes.json();
-
-let forecastHTML = "<h3>5-Day Forecast</h3>";
-
-for (let i = 0; i < forecastData.list.length; i += 8) {
-    let day = forecastData.list[i];
-
-    forecastHTML += `
-        <p>
-        📅 ${day.dt_txt.split(" ")[0]} <br>
-        🌡️ ${day.main.temp}°C <br>
-        ☁️ ${day.weather[0].main}
-        </p>
-    `;
-}
-
-document.getElementById("forecast").innerHTML = forecastHTML;
-
-            } else {
-                document.getElementById("result").innerHTML = "⏳ Loading...";
+        if (weather == "Clear") {
+            icon = "☀️";
+            document.body.style.background = "linear-gradient(to right, #fceabb, #f8b500)";
+        }
+        else if (weather == "Clouds") {
+            icon = "☁️";
+            document.body.style.background = "linear-gradient(to right, #bdc3c7, #2c3e50)";
+        }
+        else if (weather == "Rain") {
+            icon = "🌧️";
+            document.body.style.background = "linear-gradient(to right, #4b6cb7, #182848)";
+        }
+        else if (weather == "Smoke") {
+            icon = "🌫️";
+            document.body.style.background = "linear-gradient(to right, #757f9a, #d7dde8)";
+        }
+        else if (weather == "Haze") {
+            icon = "🌁";
+            document.body.style.background = "linear-gradient(to right, #a1c4fd, #c2e9fb)";
+        }
+        else {
+            icon = "🌍";
+            document.body.style.background = "linear-gradient(to right, #74ebd5, #ACB6E5)";
         }
 
-        // ⌨️ Enter key support
-        document.getElementById("city").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                getWeather();
-            }
-        });
+        document.getElementById("result").innerHTML =
+            `${icon} ${data.name} <br> 🌡️ Temp: ${data.main.temp}°C <br> ☁️ ${weather}`;
+
+        // 🔥 Forecast
+        let forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+
+        let forecastRes = await fetch(forecastUrl);
+        let forecastData = await forecastRes.json();
+
+        let forecastHTML = "<h3>5-Day Forecast</h3>";
+
+        for (let i = 0; i < forecastData.list.length; i += 8) {
+            let day = forecastData.list[i];
+
+            forecastHTML += `
+                <p>
+                📅 ${day.dt_txt.split(" ")[0]} <br>
+                🌡️ ${day.main.temp}°C <br>
+                ☁️ ${day.weather[0].main}
+                </p>
+            `;
+        }
+
+        document.getElementById("forecast").innerHTML = forecastHTML;
+
+    } else {
+        document.getElementById("result").innerHTML = "❌ City not found";
+        document.getElementById("forecast").innerHTML = "";
+    }
+}
+
+// ⌨️ Enter key (bahar hona chahiye)
+document.getElementById("city").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        getWeather();
+    }
+});
     </script>
 
 </body>
