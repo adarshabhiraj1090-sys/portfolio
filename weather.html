@@ -94,6 +94,10 @@ else if (weather == "Smoke") {
     icon = "🌫️";
     document.body.style.background = "linear-gradient(to right, #757f9a, #d7dde8)";
 }
+ else if (weather == "Haze") {
+    icon = "🌁";
+    document.body.style.background = "linear-gradient(to right, #a1c4fd, #c2e9fb)";
+ }
 else {
     icon = "🌍";
     document.body.style.background = "linear-gradient(to right, #74ebd5, #ACB6E5)";
@@ -103,8 +107,7 @@ else {
                     `${icon} ${data.name} <br> 🌡️ Temp: ${data.main.temp}°C <br> ☁️ ${weather}`;
 
             } else {
-                document.getElementById("result").innerHTML = "❌ City not found";
-            }
+                document.getElementById("result").innerHTML = "⏳ Loading...";
         }
 
         // ⌨️ Enter key support
