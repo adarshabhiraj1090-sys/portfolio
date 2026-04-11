@@ -3,32 +3,43 @@
 <head>
     <title>Weather App</title>
 
-<style>
-body {
-    font-family: Arial;
-    text-align: center;
-    background: linear-gradient(to right, #74ebd5, #ACB6E5);
-}
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+            transition: 0.5s;
+        }
 
-input {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-}
+        h1 {
+            margin-top: 30px;
+        }
 
-button {
-    padding: 10px;
-    border: none;
-    background: blue;
-    color: white;
-    border-radius: 5px;
-}
+        input {
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            width: 200px;
+            font-size: 16px;
+        }
 
-#result {
-    margin-top: 20px;
-    font-size: 20px;
-}
-</style>
+        button {
+            padding: 10px 15px;
+            border: none;
+            background: blue;
+            color: white;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -41,7 +52,7 @@ button {
 
     <script>
         async function getWeather() {
-            let city = document.getElementById("city").value;
+            let city = document.getElementById("city").value.trim();
 
             let apiKey = "12d5efc1b3d470e90a7f605476dd9c3c";
 
@@ -51,12 +62,41 @@ button {
             let data = await response.json();
 
             if (data.cod == 200) {
+
+                let weather = data.weather[0].main;
+                let icon = "";
+
+                // 🌦️ Icon set
+                if (weather == "Clear") icon = "☀️";
+                else if (weather == "Clouds") icon = "☁️";
+                else if (weather == "Rain") icon = "🌧️";
+                else icon = "🌍";
+
+                // 🎨 Background change
+                if (weather == "Clear") {
+                    document.body.style.background = "orange";
+                } else if (weather == "Clouds") {
+                    document.body.style.background = "gray";
+                } else if (weather == "Rain") {
+                    document.body.style.background = "darkblue";
+                } else {
+                    document.body.style.background = "#74ebd5";
+                }
+
                 document.getElementById("result").innerHTML =
-                    `🌍 ${data.name} <br> 🌡️ Temp: ${data.main.temp}°C <br> ☁️ ${data.weather[0].main}`;
+                    `${icon} ${data.name} <br> 🌡️ Temp: ${data.main.temp}°C <br> ☁️ ${weather}`;
+
             } else {
                 document.getElementById("result").innerHTML = "❌ City not found";
             }
         }
+
+        // ⌨️ Enter key support
+        document.getElementById("city").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                getWeather();
+            }
+        });
     </script>
 
 </body>
