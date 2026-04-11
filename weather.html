@@ -1,30 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Weather App</title>
+  <title>Weather App</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #f2f2f2;
+      padding: 50px;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+
+    .box {
+      margin-top: 20px;
+      background: white;
+      padding: 20px;
+      display: inline-block;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gray;
+    }
+  </style>
 </head>
+<body>
 
-<body style="text-align:center; font-family: Arial;">
+<h2>🌦️ Weather App</h2>
 
-<h2>Weather App 🌤️</h2>
+<input type="text" id="city" placeholder="City name enter karo">
+<button onclick="getWeather()">Search</button>
 
-<input type="text" id="city" placeholder="Enter city">
-<button onclick="getWeather()">Check</button>
-
-<h3 id="result"></h3>
+<div class="box">
+  <h3 id="name"></h3>
+  <p id="temp"></p>
+  <p id="desc"></p>
+</div>
 
 <script>
 async function getWeather() {
-    let city = document.getElementById("city").value;
+  let city = document.getElementById("city").value;
 
-    let url = "https://api.openweathermap.org/data/2.5/weather?q=" 
-              + city + "&appid=YOUR_API_KEY&units=metric";
+  let apiKey = "YOUR_API_KEY"; // yaha apni key daalna
+  let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-    let response = await fetch(url);
-    let data = await response.json();
+  let res = await fetch(url);
+  let data = await res.json();
 
-    document.getElementById("result").innerHTML =
-        "Temperature: " + data.main.temp + "°C";
+  document.getElementById("name").innerText = data.name;
+  document.getElementById("temp").innerText = "Temp: " + data.main.temp + "°C";
+  document.getElementById("desc").innerText = "Weather: " + data.weather[0].description;
 }
 </script>
 
