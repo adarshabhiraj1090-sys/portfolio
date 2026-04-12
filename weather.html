@@ -34,10 +34,10 @@
     }
 
     .card {
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.3);
         padding: 30px;
         border-radius: 20px;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(12px);
         box-shadow: 0 0 20px rgba(0,0,0,0.2);
         text-align: center;
         width: 300px;
@@ -68,10 +68,10 @@
     }
 
     #forecast p {
-        background: rgba(255,255,255,0.2);
-        padding: 8px;
-        border-radius: 10px;
-        margin: 5px;
+        background: rgba(255,255,255,0.3);
+        padding: 10px;
+        border-radius: 12px;
+        margin: 8px 0;
     }
     </style>
 </head>
@@ -91,6 +91,8 @@
 </div>
 
 <script>
+document.getElementById("result").innerHTML = "⏳ Loading...";
+document.getElementById("forecast").innerHTML = "";
 async function getWeather() {
     let city = document.getElementById("city").value.trim();
     let apiKey = "12d5efc1b3d470e90a7f605476dd9c3c"; 
