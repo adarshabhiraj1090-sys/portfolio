@@ -12,6 +12,25 @@
         height: 100vh;
         background: linear-gradient(to right, #74ebd5, #ACB6E5);
         transition: 0.5s;
+        overflow: hidden;
+    }
+
+    #weatherEffect {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+    }
+
+    .rain {
+        background: url('https://i.ibb.co/7QpKsCX/rain.gif');
+        background-size: cover;
+    }
+
+    .sun {
+        background: radial-gradient(circle, rgba(255,255,0,0.3), transparent);
     }
 
     .card {
@@ -22,6 +41,7 @@
         box-shadow: 0 0 20px rgba(0,0,0,0.2);
         text-align: center;
         width: 300px;
+        z-index: 1;
     }
 
     input {
@@ -58,6 +78,8 @@
 
 <body>
 
+<div id="weatherEffect"></div>
+
 <div class="card">
     <h1>🌦️ Weather App</h1>
 
@@ -71,7 +93,7 @@
 <script>
 async function getWeather() {
     let city = document.getElementById("city").value.trim();
-    let apiKey = "12d5efc1b3d470e90a7f605476dd9c3c"; // 
+    let apiKey = "12d5efc1b3d470e90a7f605476dd9c3c"; 
 
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
@@ -83,9 +105,13 @@ async function getWeather() {
         let weather = data.weather[0].main;
         let icon = "";
 
+        let effect = document.getElementById("weatherEffect");
+        effect.className = "";
+
         if (weather == "Clear") {
             icon = "☀️";
             document.body.style.background = "linear-gradient(to right, #fceabb, #f8b500)";
+            effect.classList.add("sun");
         }
         else if (weather == "Clouds") {
             icon = "☁️";
@@ -94,14 +120,15 @@ async function getWeather() {
         else if (weather == "Rain") {
             icon = "🌧️";
             document.body.style.background = "linear-gradient(to right, #4b6cb7, #182848)";
-        }
-        else if (weather == "Smoke") {
-            icon = "🌫️";
-            document.body.style.background = "linear-gradient(to right, #757f9a, #d7dde8)";
+            effect.classList.add("rain");
         }
         else if (weather == "Haze") {
             icon = "🌁";
             document.body.style.background = "linear-gradient(to right, #a1c4fd, #c2e9fb)";
+        }
+        else if (weather == "Smoke") {
+            icon = "🌫️";
+            document.body.style.background = "linear-gradient(to right, #757f9a, #d7dde8)";
         }
         else {
             icon = "🌍";
@@ -139,17 +166,17 @@ async function getWeather() {
     }
 }
 
-// ⌨️ Enter key support
+// ⌨️ Enter key
 document.getElementById("city").addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
         getWeather();
     }
 });
 
-    function getLocationWeather() {
+// 📍 GPS Auto Location
+function getLocationWeather() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(async function(position) {
-
             let lat = position.coords.latitude;
             let lon = position.coords.longitude;
 
@@ -162,15 +189,13 @@ document.getElementById("city").addEventListener("keypress", function(event) {
 
             if (data.cod == 200) {
                 document.getElementById("city").value = data.name;
-                getWeather(); // 👉 same function call
+                getWeather();
             }
-
         });
-    } else {
-        alert("Location not supported");
     }
-    }
-    window.onload = getLocationWeather;
+}
+
+window.onload = getLocationWeather;
 </script>
 
 </body>
