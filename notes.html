@@ -52,6 +52,7 @@
 <div class="container">
     <h1>📝 Notes App</h1>
 
+    <input type="color" id="colorPicker">
     <input type="text" id="noteInput" placeholder="Write a note...">
     <br><br>
 <input type="text" id="search" placeholder="Search notes..." onkeyup="searchNotes()">
@@ -72,6 +73,7 @@
     };
 
     function addNote() {
+        let color = document.getElementById("colorPicker").value;
         let input = document.getElementById("noteInput");
         let text = input.value;
 
@@ -79,6 +81,7 @@
 
         let noteDiv = document.createElement("div");
         noteDiv.className = "note";
+        noteDiv.style.background = color;
 
         noteDiv.innerHTML = `
             ${text}
