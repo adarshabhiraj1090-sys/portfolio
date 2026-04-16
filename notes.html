@@ -84,10 +84,10 @@
         noteDiv.style.background = color;
 
         noteDiv.innerHTML = `
-            ${text}
-            <br>
-            <button class="delete" onclick="deleteNote(this)">Delete</button>
-        `;
+    <span onclick="editNote(this)">${text}</span>
+    <br>
+    <button class="delete" onclick="deleteNote(this)">Delete</button>
+`;
 
         document.getElementById("notes").appendChild(noteDiv);
 
@@ -124,6 +124,14 @@ function clearAll() {
     document.getElementById("notes").innerHTML = "";
     localStorage.removeItem("notes");
 }
+function editNote(element) {
+    let newText = prompt("Edit your note:", element.innerText);
+
+    if (newText !== null && newText !== "") {
+        element.innerText = newText;
+        saveNotes();
+    }
+ }
 </script>
 
 </body>
