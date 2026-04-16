@@ -59,6 +59,14 @@
 </div>
 
 <script>
+    // Load notes on page load
+    window.onload = function() {
+        let savedNotes = localStorage.getItem("notes");
+        if (savedNotes) {
+            document.getElementById("notes").innerHTML = savedNotes;
+        }
+    };
+
     function addNote() {
         let input = document.getElementById("noteInput");
         let text = input.value;
@@ -71,12 +79,23 @@
         noteDiv.innerHTML = `
             ${text}
             <br>
-            <button class="delete" onclick="this.parentElement.remove()">Delete</button>
+            <button class="delete" onclick="deleteNote(this)">Delete</button>
         `;
 
         document.getElementById("notes").appendChild(noteDiv);
 
+        saveNotes();
         input.value = "";
+    }
+
+    function deleteNote(btn) {
+        btn.parentElement.remove();
+        saveNotes();
+    }
+
+    function saveNotes() {
+        let notesHTML = document.getElementById("notes").innerHTML;
+        localStorage.setItem("notes", notesHTML);
     }
 </script>
 
