@@ -53,6 +53,10 @@
     <h1>📝 Notes App</h1>
 
     <input type="text" id="noteInput" placeholder="Write a note...">
+    <br><br>
+<input type="text" id="search" placeholder="Search notes..." onkeyup="searchNotes()">
+<br><br>
+    <button onclick="clearAll()">Clear All</button>
     <button onclick="addNote()">Add</button>
 
     <div id="notes"></div>
@@ -97,6 +101,26 @@
         let notesHTML = document.getElementById("notes").innerHTML;
         localStorage.setItem("notes", notesHTML);
     }
+
+    function searchNotes() {
+    let input = document.getElementById("search").value.toLowerCase();
+    let notes = document.getElementsByClassName("note");
+
+    for (let i = 0; i < notes.length; i++) {
+        let text = notes[i].innerText.toLowerCase();
+
+        if (text.includes(input)) {
+            notes[i].style.display = "block";
+        } else {
+            notes[i].style.display = "none";
+        }
+    }
+}
+
+function clearAll() {
+    document.getElementById("notes").innerHTML = "";
+    localStorage.removeItem("notes");
+}
 </script>
 
 </body>
