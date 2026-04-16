@@ -55,6 +55,7 @@
 <br>
 <button onclick="addNote()">Add Note</button>
 
+<!-- IMPORTANT: Ye container zaroor hona chahiye -->
 <div id="notesContainer"></div>
 
 <script>
@@ -81,7 +82,10 @@ function showNotes() {
 function addNote() {
     let input = document.getElementById("noteInput").value;
 
-    if (input === "") return;
+    if (input === "") {
+        alert("Write something!");
+        return;
+    }
 
     let newNote = {
         text: input,
@@ -106,7 +110,7 @@ function deleteNote(index) {
     showNotes();
 }
 
-// Load notes on start
+// Page load pe notes show
 showNotes();
 </script>
 
