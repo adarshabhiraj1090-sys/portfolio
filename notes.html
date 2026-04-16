@@ -6,133 +6,109 @@
     <style>
         body {
             font-family: Arial;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
             text-align: center;
-            margin: 0;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
         }
 
-        .container {
-            margin-top: 50px;
+        h1 {
+            margin-top: 20px;
         }
 
         input {
             padding: 10px;
-            width: 60%;
+            width: 250px;
             border-radius: 8px;
             border: none;
+            margin: 10px;
         }
 
         button {
             padding: 10px 15px;
             border: none;
-            background: cyan;
-            color: black;
             border-radius: 8px;
+            background: cyan;
             cursor: pointer;
         }
 
         .note {
             background: rgba(255,255,255,0.2);
-            margin: 10px;
-            padding: 10px;
+            margin: 10px auto;
+            padding: 15px;
+            width: 80%;
             border-radius: 10px;
         }
 
-        .delete {
+        .note button {
             background: red;
             color: white;
-            margin-top: 5px;
+            margin-top: 10px;
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>📝 Notes App</h1>
+<h1>📝 Notes App</h1>
 
-    <input type="color" id="colorPicker">
-    <input type="text" id="noteInput" placeholder="Write a note...">
-    <br><br>
-<input type="text" id="search" placeholder="Search notes..." onkeyup="searchNotes()">
-<br><br>
-    <button onclick="clearAll()">Clear All</button>
-    <button onclick="addNote()">Add</button>
+<input type="text" id="noteInput" placeholder="Write a note...">
+<br>
+<button onclick="addNote()">Add Note</button>
 
-    <div id="notes"></div>
-</div>
+<div id="notesContainer"></div>
 
 <script>
-    // Load notes on page load
-    window.onload = function() {
-        let savedNotes = localStorage.getItem("notes");
-        if (savedNotes) {
-            document.getElementById("notes").innerHTML = savedNotes;
-        }
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+// Show Notes
+function showNotes() {
+    let output = "";
+
+    notes.forEach((note, index) => {
+        output += `
+        <div class="note">
+            <p>${note.text}</p>
+            <small>${note.date}</small><br>
+            <button onclick="deleteNote(${index})">Delete</button>
+        </div>
+        `;
+    });
+
+    document.getElementById("notesContainer").innerHTML = output;
+}
+
+// Add Note
+function addNote() {
+    let input = document.getElementById("noteInput").value;
+
+    if (input === "") return;
+
+    let newNote = {
+        text: input,
+        date: new Date().toLocaleString()
     };
 
-    function addNote() {
-        let color = document.getElementById("colorPicker").value;
-        let input = document.getElementById("noteInput");
-        let text = input.value;
+    notes.push(newNote);
 
-        if (text === "") return;
+    localStorage.setItem("notes", JSON.stringify(notes));
 
-        let noteDiv = document.createElement("div");
-        noteDiv.className = "note";
-        noteDiv.style.background = color;
+    document.getElementById("noteInput").value = "";
 
-        noteDiv.innerHTML = `
-    <span onclick="editNote(this)">${text}</span>
-    <br>
-    <button class="delete" onclick="deleteNote(this)">Delete</button>
-`;
-
-        document.getElementById("notes").appendChild(noteDiv);
-
-        saveNotes();
-        input.value = "";
-    }
-
-    function deleteNote(btn) {
-        btn.parentElement.remove();
-        saveNotes();
-    }
-
-    function saveNotes() {
-        let notesHTML = document.getElementById("notes").innerHTML;
-        localStorage.setItem("notes", notesHTML);
-    }
-
-    function searchNotes() {
-    let input = document.getElementById("search").value.toLowerCase();
-    let notes = document.getElementsByClassName("note");
-
-    for (let i = 0; i < notes.length; i++) {
-        let text = notes[i].innerText.toLowerCase();
-
-        if (text.includes(input)) {
-            notes[i].style.display = "block";
-        } else {
-            notes[i].style.display = "none";
-        }
-    }
+    showNotes();
 }
 
-function clearAll() {
-    document.getElementById("notes").innerHTML = "";
-    localStorage.removeItem("notes");
-}
-function editNote(element) {
-    let newText = prompt("Edit your note:", element.innerText);
+// Delete Note
+function deleteNote(index) {
+    notes.splice(index, 1);
 
-    if (newText !== null && newText !== "") {
-        element.innerText = newText;
-        saveNotes();
-    }
- }
+    localStorage.setItem("notes", JSON.stringify(notes));
+
+    showNotes();
+}
+
+// Load notes on start
+showNotes();
 </script>
 
 </body>
-  </html>
+</html>
