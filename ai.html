@@ -79,34 +79,40 @@ function send() {
 function getReply(msg) {
     msg = msg.toLowerCase();
 
-    // Greetings
-    if (msg.includes("hello") || msg.includes("hi")) 
-        return "Hello 👋 How can I help you?";
+    // greetings
+    if (msg.includes("hello") || msg.includes("hi"))
+        return "Hello 👋 Kaise ho?";
 
-    // Help
-    if (msg.includes("help")) 
-        return "I can help with basic questions 😊";
+    // Hindi understanding
+    if (msg.includes("tumko") || msg.includes("tumhe"))
+        return "Main tumhari help ke liye bana hu 😊";
 
-    // About
-    if (msg.includes("your name")) 
-        return "I am your AI assistant 🤖";
+    if (msg.includes("kaise ho"))
+        return "Main mast hu 😎 Tum batao?";
 
-    // Coding
-    if (msg.includes("html")) 
-        return "HTML is used to create websites 🧑‍💻";
+    if (msg.includes("tumhara naam"))
+        return "Mera naam AI Bot hai 🤖";
 
-    if (msg.includes("css")) 
-        return "CSS is used to style websites 🎨";
+    // coding
+    if (msg.includes("html"))
+        return "HTML website ka structure banata hai 🧱";
 
-    if (msg.includes("javascript")) 
-        return "JavaScript makes websites interactive ⚡";
+    if (msg.includes("css"))
+        return "CSS website ko stylish banata hai 🎨";
 
-    // Fun
-    if (msg.includes("joke")) 
-        return "😂 Why do programmers hate bugs? Because they bug them!";
+    if (msg.includes("javascript"))
+        return "JavaScript website ko smart banata hai ⚡";
 
-    // Default smart reply
-    return "🤖 I'm still learning... try asking about coding, hello, help, joke etc.";
+    // funny
+    if (msg.includes("joke"))
+        return "😂 Programmer ne girlfriend kyu chhodi? Kyuki usme bugs the!";
+
+    // thanks
+    if (msg.includes("thank"))
+        return "Welcome 😄";
+
+    // default smart reply
+    return "🤖 Samajh nahi aaya... thoda simple pucho 😅";
 }
 </script>
 </body>
