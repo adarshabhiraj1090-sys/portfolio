@@ -56,8 +56,6 @@
 
 <div id="chatbox"></div>
 
-<input type="text" id="userInput" placeholder="Ask anything...">
-
 <input type="text" id="userInput" placeholder="Type message...">
 <button onclick="send()">Send</button>
 <button onclick="clearChat()">Clear Chat</button>
@@ -94,7 +92,7 @@ function send() {
 }
 
 // 🔹 AI logic (same as before)
-function getReply(msg) {
+ function getReply(msg) {
     msg = msg.toLowerCase();
 
     if (msg.includes("hello") || msg.includes("hi"))
@@ -103,16 +101,31 @@ function getReply(msg) {
     if (msg.includes("how are you") || msg.includes("kaise ho"))
         return "Main mast hu 😎 Tum batao?";
 
+    if (msg.includes("who are you") || msg.includes("tum kon ho"))
+        return "Main tumhara AI chatbot hu 🤖";
+
     if (msg.includes("who made you") || msg.includes("kisne banaya"))
         return "Mujhe Adarsh ne banaya hai 😎🔥";
 
-    return "🤖 Interesting question hai 😄 Thoda aur clearly pucho";
-}
+    if (msg.includes("kya kar rahe ho"))
+        return "Main tumse baat kar raha hu 😄";
+
+    if (msg.includes("thank"))
+        return "Welcome 😊";
+
+    return "🤖 Samajh nahi aaya 😅 thoda simple pucho";
+ }
     
 function clearChat() {
     localStorage.removeItem("chat");
     document.getElementById("chatbox").innerHTML = "";
  }
+
+ document.getElementById("userInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        send();
+    }
+});
 
 </script>
 </body>
