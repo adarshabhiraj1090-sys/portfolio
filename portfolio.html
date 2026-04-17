@@ -1,34 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Portfolio</title>
+    <title>Adarsh Portfolio</title>
+
     <style>
         body {
-            font-family: Arial;
             margin: 0;
-            background: #111;
+            font-family: Arial;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             text-align: center;
         }
 
         header {
             padding: 40px;
-            background: #222;
         }
 
-        section {
-            padding: 30px;
+        img {
+            width: 120px;
+            border-radius: 50%;
+            margin-top: 10px;
+        }
+
+        .section {
+            background: rgba(255,255,255,0.1);
+            margin: 20px;
+            padding: 20px;
+            border-radius: 15px;
         }
 
         .project {
-            background: #333;
+            background: rgba(255,255,255,0.2);
             margin: 10px;
             padding: 15px;
             border-radius: 10px;
         }
 
         a {
-            color: cyan;
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: cyan;
+            color: black;
+            border-radius: 8px;
             text-decoration: none;
         }
     </style>
@@ -37,45 +51,46 @@
 <body>
 
 <header>
-    <h1>Adarsh Kumar</h1>
-    <p>Frontend Developer 🚀</p>
+    <h1>Adarsh Kumar 🚀</h1>
+    <p>Frontend Developer</p>
 </header>
 
-<section>
-    <h2>About Me</h2>
-    <p>I build websites and web apps using HTML, CSS, JavaScript.</p>
-</section>
+<div class="section">
+    <h2>👨‍💻 About Me</h2>
+    <p>I build websites using HTML, CSS, JavaScript.</p>
+</div>
 
-<section>
-    <h2>My Projects</h2>
+<div class="section">
+    <h2>🛠️ Skills</h2>
+    <p>✔ HTML</p>
+    <p>✔ CSS</p>
+    <p>✔ JavaScript</p>
+</div>
+
+<div class="section">
+    <h2>💼 Projects</h2>
 
     <div class="project">
         <h3>🌦️ Weather App</h3>
-        <a href="weather.html">View Project</a>
+        <a href="weather.html">View</a>
     </div>
 
     <div class="project">
-        <h3>📝 Todo App</h3>
-        <a href="todo.html">View Project</a>
+        <h3>📝 Notes App</h3>
+        <a href="notes.html">View</a>
     </div>
 
     <div class="project">
         <h3>🧮 Calculator</h3>
-        <a href="calculator.html">View Project</a>
+        <a href="calculator.html">View</a>
     </div>
 
-    <div class="project">
-    <h3>📝 Notes App</h3>
-    <p>Notes with save, search, color & edit</p>
-    <a href="notes.html">View Project</a>
-    </div>
+</div>
 
-</section>
-
-<section>
-    <h2>Contact</h2>
+<div class="section">
+    <h2>📞 Contact</h2>
     <p>Email: adarshabhiraj1090@gmail.com</p>
-</section>
+</div>
 
 </body>
 </html>
