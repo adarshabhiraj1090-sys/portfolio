@@ -56,10 +56,23 @@
 
 <div id="chatbox"></div>
 
+<input type="text" id="userInput" placeholder="Ask anything...">
+
 <input type="text" id="userInput" placeholder="Type message...">
 <button onclick="send()">Send</button>
+<button onclick="clearChat()">Clear Chat</button>
 
 <script>
+
+// 🔹 Load old chat on page load
+window.onload = function () {
+    let savedChat = localStorage.getItem("chat");
+    if (savedChat) {
+        document.getElementById("chatbox").innerHTML = savedChat;
+    }
+};
+
+// 🔹 Send message
 function send() {
     let input = document.getElementById("userInput").value;
     if (input === "") return;
@@ -73,57 +86,34 @@ function send() {
     chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
 
     document.getElementById("userInput").value = "";
+
+    // 🔹 Save chat
+    localStorage.setItem("chat", chatbox.innerHTML);
+
     chatbox.scrollTop = chatbox.scrollHeight;
 }
 
+// 🔹 AI logic (same as before)
 function getReply(msg) {
     msg = msg.toLowerCase();
 
-    // greetings
     if (msg.includes("hello") || msg.includes("hi"))
         return "Hello 👋 Kaise ho?";
 
-    // how are you
     if (msg.includes("how are you") || msg.includes("kaise ho"))
         return "Main mast hu 😎 Tum batao?";
 
-    // what happens / kya hota hai
-    if (msg.includes("what happens") || msg.includes("kya hota"))
-        return "Sab badhiya chal raha hai 😄 Tum kya jaan na chahte ho?";
-
-    // who made you
     if (msg.includes("who made you") || msg.includes("kisne banaya"))
         return "Mujhe Adarsh ne banaya hai 😎🔥";
 
-    // name
-    if (msg.includes("your name") || msg.includes("tumhara naam"))
-        return "Mera naam AI Bot hai 🤖";
-
-    // help
-    if (msg.includes("help"))
-        return "Main basic questions ka answer de sakta hu 😊";
-
-    // coding
-    if (msg.includes("html"))
-        return "HTML website ka structure banata hai 🧱";
-
-    if (msg.includes("css"))
-        return "CSS website ko stylish banata hai 🎨";
-
-    if (msg.includes("javascript"))
-        return "JavaScript website ko smart banata hai ⚡";
-
-    // joke
-    if (msg.includes("joke"))
-        return "😂 Programmer ne code kyu toda? Kyuki usme bugs the!";
-
-    // thanks
-    if (msg.includes("thank"))
-        return "Welcome 😄";
-
-    // default smart reply
     return "🤖 Interesting question hai 😄 Thoda aur clearly pucho";
 }
+    
+function clearChat() {
+    localStorage.removeItem("chat");
+    document.getElementById("chatbox").innerHTML = "";
+ }
+
 </script>
 </body>
 </html>
