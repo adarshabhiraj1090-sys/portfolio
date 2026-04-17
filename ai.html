@@ -77,18 +77,35 @@ function send() {
 
     let chatbox = document.getElementById("chatbox");
 
+    // User message
     chatbox.innerHTML += `<div class="user">You: ${input}</div>`;
 
-    let reply = getReply(input);
-
-    chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
+    chatbox.innerHTML += `<div class="bot" id="typing">⏳ Typing...</div>`;
 
     document.getElementById("userInput").value = "";
 
-    // 🔹 Save chat
-    localStorage.setItem("chat", chatbox.innerHTML);
+    // 🔥 Typing animation show karo
+    chatbox.innerHTML += `<div class="bot" id="typing">Bot is typing...</div>`;
 
     chatbox.scrollTop = chatbox.scrollHeight;
+
+    // ⏳ Delay (1 second)
+    setTimeout(() => {
+
+        let reply = getReply(input);
+
+        // Typing text hatao
+        document.getElementById("typing").remove();
+
+        // Real reply show karo
+        chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
+
+        // Save chat
+        localStorage.setItem("chat", chatbox.innerHTML);
+
+        chatbox.scrollTop = chatbox.scrollHeight;
+
+    }, 1000);
 }
 
 // 🔹 AI logic (same as before)
