@@ -87,6 +87,10 @@ function getReply(msg) {
     if (msg.includes("how are you") || msg.includes("kaise ho"))
         return "Main mast hu 😎 Tum batao?";
 
+    // what happens / kya hota hai
+    if (msg.includes("what happens") || msg.includes("kya hota"))
+        return "Sab badhiya chal raha hai 😄 Tum kya jaan na chahte ho?";
+
     // who made you
     if (msg.includes("who made you") || msg.includes("kisne banaya"))
         return "Mujhe Adarsh ne banaya hai 😎🔥";
@@ -111,14 +115,14 @@ function getReply(msg) {
 
     // joke
     if (msg.includes("joke"))
-        return "😂 Coding karte karte programmer pagal kyu ho gaya? Kyuki uske paas bugs hi bugs the!";
+        return "😂 Programmer ne code kyu toda? Kyuki usme bugs the!";
 
     // thanks
     if (msg.includes("thank"))
         return "Welcome 😄";
 
-    // default
-    return "🤖 Samajh nahi aaya... thoda simple pucho 😅";
+    // default smart reply
+    return "🤖 Interesting question hai 😄 Thoda aur clearly pucho";
 }
 </script>
 </body>
