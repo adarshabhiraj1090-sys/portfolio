@@ -60,38 +60,36 @@
 <button onclick="send()">Send</button>
 
 <script>
-async function send() {
+function send() {
     let input = document.getElementById("userInput").value;
     if (input === "") return;
 
     let chatbox = document.getElementById("chatbox");
 
+    // User message
     chatbox.innerHTML += `<div class="user">You: ${input}</div>`;
 
-    document.getElementById("userInput").value = "";
+    let reply = getReply(input);
 
-    let apiKey = "YOUR_API_KEY";
-    let response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + apiKey
-        },
-        body: JSON.stringify({
-            model: "gpt-4o-mini",
-            messages: [{ role: "user", content: input }]
-        })
-    });
-
-    let data = await response.json();
-
-    let reply = data.choices[0].message.content;
-
+    // Bot reply
     chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
 
+    document.getElementById("userInput").value = "";
     chatbox.scrollTop = chatbox.scrollHeight;
 }
-</script>
 
+// Smart replies
+function getReply(msg) {
+    msg = msg.toLowerCase();
+
+    if (msg.includes("hello")) return "Hi 👋 How can I help you?";
+    if (msg.includes("how are you")) return "I am fine 😄 What about you?";
+    if (msg.includes("your name")) return "I am your AI bot 🤖";
+    if (msg.includes("help")) return "Sure! Tell me your problem 😊";
+    if (msg.includes("bye")) return "Goodbye 👋 Have a nice day!";
+
+    return "I am learning 😅 Please ask something else";
+}
+</script>
 </body>
 </html>
