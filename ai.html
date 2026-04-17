@@ -83,15 +83,21 @@ function getReply(msg) {
     if (msg.includes("hello") || msg.includes("hi"))
         return "Hello 👋 Kaise ho?";
 
-    // Hindi understanding
-    if (msg.includes("tumko") || msg.includes("tumhe"))
-        return "Main tumhari help ke liye bana hu 😊";
-
-    if (msg.includes("kaise ho"))
+    // how are you
+    if (msg.includes("how are you") || msg.includes("kaise ho"))
         return "Main mast hu 😎 Tum batao?";
 
-    if (msg.includes("tumhara naam"))
+    // who made you
+    if (msg.includes("who made you") || msg.includes("kisne banaya"))
+        return "Mujhe Adarsh ne banaya hai 😎🔥";
+
+    // name
+    if (msg.includes("your name") || msg.includes("tumhara naam"))
         return "Mera naam AI Bot hai 🤖";
+
+    // help
+    if (msg.includes("help"))
+        return "Main basic questions ka answer de sakta hu 😊";
 
     // coding
     if (msg.includes("html"))
@@ -103,15 +109,15 @@ function getReply(msg) {
     if (msg.includes("javascript"))
         return "JavaScript website ko smart banata hai ⚡";
 
-    // funny
+    // joke
     if (msg.includes("joke"))
-        return "😂 Programmer ne girlfriend kyu chhodi? Kyuki usme bugs the!";
+        return "😂 Coding karte karte programmer pagal kyu ho gaya? Kyuki uske paas bugs hi bugs the!";
 
     // thanks
     if (msg.includes("thank"))
         return "Welcome 😄";
 
-    // default smart reply
+    // default
     return "🤖 Samajh nahi aaya... thoda simple pucho 😅";
 }
 </script>
