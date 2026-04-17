@@ -66,29 +66,47 @@ function send() {
 
     let chatbox = document.getElementById("chatbox");
 
-    // User message
     chatbox.innerHTML += `<div class="user">You: ${input}</div>`;
 
     let reply = getReply(input);
 
-    // Bot reply
     chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
 
     document.getElementById("userInput").value = "";
     chatbox.scrollTop = chatbox.scrollHeight;
 }
 
-// Smart replies
 function getReply(msg) {
     msg = msg.toLowerCase();
 
-    if (msg.includes("hello")) return "Hi 👋 How can I help you?";
-    if (msg.includes("how are you")) return "I am fine 😄 What about you?";
-    if (msg.includes("your name")) return "I am your AI bot 🤖";
-    if (msg.includes("help")) return "Sure! Tell me your problem 😊";
-    if (msg.includes("bye")) return "Goodbye 👋 Have a nice day!";
+    // Greetings
+    if (msg.includes("hello") || msg.includes("hi")) 
+        return "Hello 👋 How can I help you?";
 
-    return "I am learning 😅 Please ask something else";
+    // Help
+    if (msg.includes("help")) 
+        return "I can help with basic questions 😊";
+
+    // About
+    if (msg.includes("your name")) 
+        return "I am your AI assistant 🤖";
+
+    // Coding
+    if (msg.includes("html")) 
+        return "HTML is used to create websites 🧑‍💻";
+
+    if (msg.includes("css")) 
+        return "CSS is used to style websites 🎨";
+
+    if (msg.includes("javascript")) 
+        return "JavaScript makes websites interactive ⚡";
+
+    // Fun
+    if (msg.includes("joke")) 
+        return "😂 Why do programmers hate bugs? Because they bug them!";
+
+    // Default smart reply
+    return "🤖 I'm still learning... try asking about coding, hello, help, joke etc.";
 }
 </script>
 </body>
