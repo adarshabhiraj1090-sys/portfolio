@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AI Chat</title>
+    <title>Adarsh AI Assistant</title>
 
     <style>
         body {
@@ -23,19 +23,12 @@
             text-align: left;
         }
 
-        .user {
-            color: cyan;
-            margin: 5px;
-        }
-
-        .bot {
-            color: yellow;
-            margin: 5px;
-        }
+        .user { color: cyan; margin: 5px; }
+        .bot { color: yellow; margin: 5px; }
 
         input {
             padding: 10px;
-            width: 70%;
+            width: 60%;
             border-radius: 8px;
             border: none;
         }
@@ -46,6 +39,7 @@
             border-radius: 8px;
             background: cyan;
             cursor: pointer;
+            margin: 5px;
         }
     </style>
 </head>
@@ -58,155 +52,116 @@
 
 <input type="text" id="userInput" placeholder="Ask me anything...">
 <button onclick="send()">Send</button>
-<button onclick="startVoice()">🎤 Speak</button>
 <button onclick="clearChat()">Clear Chat</button>
+<button onclick="toggleVoice()">🔊 Speak</button>
 
 <script>
- 
-let isVoice = false;
 
-// 🔹 Load old chat on page load
+// 🔹 Load saved chat
 window.onload = function () {
-    let savedChat = localStorage.getItem("chat");
-    if (savedChat) {
-        document.getElementById("chatbox").innerHTML = savedChat;
+    let saved = localStorage.getItem("chat");
+    if (saved) {
+        document.getElementById("chatbox").innerHTML = saved;
     }
 };
 
 // 🔹 Send message
 function send() {
-    let input = document.getElementById("userInput").value;
+    let input = document.getElementById("userInput").value.trim();
     if (input === "") return;
 
     let chatbox = document.getElementById("chatbox");
 
-    // User message
     chatbox.innerHTML += `<div class="user">You: ${input}</div>`;
-
-    chatbox.innerHTML += `<div class="bot" id="typing">🤖 Typing...</div>`;
 
     document.getElementById("userInput").value = "";
 
-    // 🔥 Typing animation show karo
-    
-    chatbox.scrollTop = chatbox.scrollHeight;
+    // Typing animation
+    chatbox.innerHTML += `<div class="bot" id="typing">⏳ Bot is typing...</div>`;
+    scrollDown();
 
-    // ⏳ Delay (1 second)
     setTimeout(() => {
+        document.getElementById("typing").remove();
 
         let reply = getReply(input);
 
-        // Typing text hatao
-        document.getElementById("typing").remove();
-
-        // Real reply show karo
         chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
-        if (isVoice) {
-           speak(reply);
-           isVoice = false;
-        }
+
+        // Speak if enabled
+        if (voiceOn) speak(reply);
 
         // Save chat
         localStorage.setItem("chat", chatbox.innerHTML);
 
-        chatbox.scrollTo({
-    top: chatbox.scrollHeight,
-    behavior: "smooth"
-});
+        scrollDown();
 
-    }, 1000);
+    }, 800);
 }
 
-// 🔹 AI logic (same as before)
- function getReply(msg) {
+// 🔹 Smart reply system
+function getReply(msg) {
     msg = msg.toLowerCase();
 
     if (msg.includes("hello") || msg.includes("hi"))
         return "Hello 👋 Kaise ho?";
 
-    if (msg.includes("how are you") || msg.includes("kaise ho"))
+    if (msg.includes("kaise ho") || msg.includes("how are you"))
         return "Main mast hu 😎 Tum batao?";
-
-    if (msg.includes("who are you") || msg.includes("tum kon ho"))
-        return "Main tumhara AI chatbot hu 🤖";
 
     if (msg.includes("who made you") || msg.includes("kisne banaya"))
         return "Mujhe Adarsh ne banaya hai 😎🔥";
 
-     let replies = [
-    "🤔 Thoda aur clearly pucho",
-    "😅 Samajh nahi aaya",
-    "👀 Interesting hai, aur batao",
-    "😎 Ye thoda tough hai"
-];
+    if (msg.includes("tum kon ho"))
+        return "Main tumhara AI assistant hu 🤖";
 
-return replies[Math.floor(Math.random() * replies.length)];
+    // Random replies
+    let replies = [
+        "🤔 Thoda aur clearly pucho",
+        "😅 Samajh nahi aaya",
+        "👀 Interesting hai, aur batao",
+        "😎 Ye thoda tough hai"
+    ];
 
-    if (msg.includes("kya kar rahe ho"))
-        return "Main tumse baat kar raha hu 😄";
+    return replies[Math.floor(Math.random() * replies.length)];
+}
 
-    if (msg.includes("thank"))
-        return "Welcome 😊";
-
-    return "🤖 Samajh nahi aaya 😅 thoda simple pucho";
- }
-
-    if (msg.includes("name"))
-    return "Mera naam Adarsh AI Assistant hai 🤖";
-
-if (msg.includes("time"))
-    return new Date().toLocaleTimeString();
-
-if (msg.includes("date"))
-    return new Date().toLocaleDateString();
-    
+// 🔹 Clear chat
 function clearChat() {
     localStorage.removeItem("chat");
     document.getElementById("chatbox").innerHTML = "";
- }
+}
 
- document.getElementById("userInput").addEventListener("keypress", function(e) {
+// 🔹 Enter key support
+document.getElementById("userInput").addEventListener("keypress", function(e) {
     if (e.key === "Enter") {
         send();
     }
 });
 
-function startVoice() {
-    isVoice = true;
-    let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-
-    recognition.lang = "en-IN"; // Hindi + English support
-
-    recognition.start();
-
-    recognition.onstart = function () {
-        alert("🎤 बोलो...");
-    };
-
-    recognition.onresult = function (event) {
-        let voiceText = event.results[0][0].transcript;
-
-        // input box में text डालो
-        document.getElementById("userInput").value = voiceText;
-
-        // auto send
-        send();
-    };
-
-    recognition.onerror = function () {
-        alert("❌ Voice error, try again");
-    };
+// 🔹 Smooth scroll
+function scrollDown() {
+    let chatbox = document.getElementById("chatbox");
+    chatbox.scrollTo({
+        top: chatbox.scrollHeight,
+        behavior: "smooth"
+    });
 }
 
- function speak(text) {
-    let speech = new SpeechSynthesisUtterance();
-    speech.text = text;
-    speech.lang = "en-IN"; // Hindi + English support
-    speech.rate = 1;
+// 🔹 Voice system
+let voiceOn = false;
 
+function toggleVoice() {
+    voiceOn = !voiceOn;
+    alert(voiceOn ? "Voice ON 🔊" : "Voice OFF 🔇");
+}
+
+function speak(text) {
+    let speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-US";
     window.speechSynthesis.speak(speech);
- }
+}
 
 </script>
+
 </body>
 </html>
