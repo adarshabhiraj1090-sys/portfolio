@@ -58,6 +58,7 @@
 
 <input type="text" id="userInput" placeholder="Type message...">
 <button onclick="send()">Send</button>
+<button onclick="startVoice()">🎤 Speak</button>
 <button onclick="clearChat()">Clear Chat</button>
 
 <script>
@@ -142,6 +143,33 @@ function clearChat() {
         send();
     }
 });
+
+function startVoice() {
+
+    let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+    recognition.lang = "en-IN"; // Hindi + English support
+
+    recognition.start();
+
+    recognition.onstart = function () {
+        alert("🎤 बोलो...");
+    };
+
+    recognition.onresult = function (event) {
+        let voiceText = event.results[0][0].transcript;
+
+        // input box में text डालो
+        document.getElementById("userInput").value = voiceText;
+
+        // auto send
+        send();
+    };
+
+    recognition.onerror = function () {
+        alert("❌ Voice error, try again");
+    };
+}
 
 </script>
 </body>
