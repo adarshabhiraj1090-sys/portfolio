@@ -121,6 +121,10 @@ function send() {
 
     chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
 
+    
+// 🔊 Voice reply
+speak(reply);
+
     document.getElementById("userInput").value = "";
 
     chatbox.scrollTop = chatbox.scrollHeight;
