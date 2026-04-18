@@ -52,11 +52,11 @@
 
 <body>
 
-<h1>🤖 My AI Chat</h1>
+<h1>🤖 Adarsh AI Assistant</h1>
 
 <div id="chatbox"></div>
 
-<input type="text" id="userInput" placeholder="Type message...">
+<input type="text" id="userInput" placeholder="Ask me anything...">
 <button onclick="send()">Send</button>
 <button onclick="startVoice()">🎤 Speak</button>
 <button onclick="clearChat()">Clear Chat</button>
@@ -83,7 +83,7 @@ function send() {
     // User message
     chatbox.innerHTML += `<div class="user">You: ${input}</div>`;
 
-    chatbox.innerHTML += `<div class="bot" id="typing">⏳ Typing...</div>`;
+    chatbox.innerHTML += `<div class="bot" id="typing">🤖 Typing...</div>`;
 
     document.getElementById("userInput").value = "";
 
@@ -109,7 +109,10 @@ function send() {
         // Save chat
         localStorage.setItem("chat", chatbox.innerHTML);
 
-        chatbox.scrollTop = chatbox.scrollHeight;
+        chatbox.scrollTo({
+    top: chatbox.scrollHeight,
+    behavior: "smooth"
+});
 
     }, 1000);
 }
