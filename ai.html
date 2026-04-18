@@ -109,37 +109,22 @@ window.onload = function () {
 };
 
 // 🔹 Send message
-async function send() {
+function send() {
     let input = document.getElementById("userInput").value;
     if (input === "") return;
 
     let chatbox = document.getElementById("chatbox");
 
     chatbox.innerHTML += `<div class="user">You: ${input}</div>`;
-    document.getElementById("userInput").value = "";
 
-    let apiKey = "YOUR_API_KEY"; // 👈 यहाँ key डालना
-
-    let response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + apiKey
-        },
-        body: JSON.stringify({
-            model: "gpt-4o-mini",
-            messages: [{ role: "user", content: input }]
-        })
-    });
-
-    let data = await response.json();
-
-    let reply = data.choices[0].message.content;
+    let reply = getReply(input);
 
     chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
+
+    document.getElementById("userInput").value = "";
+
     chatbox.scrollTop = chatbox.scrollHeight;
 }
-
 // 🔹 Reply logic
 function getReply(msg) {
     msg = msg.toLowerCase();
