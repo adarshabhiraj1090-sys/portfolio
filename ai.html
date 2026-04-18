@@ -46,7 +46,7 @@ button {
 
 <body>
 
-<h1>🤖 My AI Chat</h1>
+<h1>🤖 Adarsh AI Assistant</h1>
 
 <div id="chatbox"></div>
 
@@ -57,6 +57,8 @@ button {
 <button onclick="clearChat()">Clear Chat</button>
 
 <script>
+
+ let isVoice = false;
 
 // 🔹 Load chat
 window.onload = function () {
@@ -79,7 +81,7 @@ function send(msgFromVoice = null) {
     document.getElementById("userInput").value = "";
 
     // Typing animation
-    chatbox.innerHTML += `<div class="bot" id="typing">⏳ Typing...</div>`;
+    chatbox.innerHTML += `<div class="bot" id="typing">🤖 Typing...</div>`;
     scrollDown();
 
     setTimeout(() => {
@@ -90,7 +92,10 @@ function send(msgFromVoice = null) {
 
         chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
 
-        speak(reply); // 🔊 always speak
+        if (isVoice) {
+    speak(reply);
+    isVoice = false;
+        }
 
         localStorage.setItem("chat", chatbox.innerHTML);
 
@@ -128,6 +133,7 @@ function getReply(msg) {
 // 🔹 Voice input (MAIN FIX)
 function startVoice() {
 
+    isVoice = true;
     let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 
     recognition.lang = "en-IN";
