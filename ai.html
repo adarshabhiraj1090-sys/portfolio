@@ -62,6 +62,8 @@
 <button onclick="clearChat()">Clear Chat</button>
 
 <script>
+ 
+let isVoice = false;
 
 // 🔹 Load old chat on page load
 window.onload = function () {
@@ -99,7 +101,10 @@ function send() {
 
         // Real reply show karo
         chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
-        speak(reply);
+        if (isVoice) {
+           speak(reply);
+           isVoice = false;
+        }
 
         // Save chat
         localStorage.setItem("chat", chatbox.innerHTML);
@@ -146,7 +151,7 @@ function clearChat() {
 });
 
 function startVoice() {
-
+    isVoice = true;
     let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 
     recognition.lang = "en-IN"; // Hindi + English support
