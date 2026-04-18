@@ -1,63 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Adarsh AI Assistant</title>
+<title>My AI Chat</title>
 
-    <style>
-        body {
-            font-family: Arial;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            text-align: center;
-        }
+<style>
+body {
+    font-family: Arial;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    text-align: center;
+}
 
-        #chatbox {
-            width: 90%;
-            max-width: 500px;
-            margin: 20px auto;
-            background: rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 10px;
-            height: 300px;
-            overflow-y: auto;
-            text-align: left;
-        }
+#chatbox {
+    width: 90%;
+    max-width: 500px;
+    margin: 20px auto;
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 10px;
+    height: 300px;
+    overflow-y: auto;
+    text-align: left;
+}
 
-        .user { color: cyan; margin: 5px; }
-        .bot { color: yellow; margin: 5px; }
+.user { color: cyan; margin: 5px; }
+.bot { color: yellow; margin: 5px; }
 
-        input {
-            padding: 10px;
-            width: 60%;
-            border-radius: 8px;
-            border: none;
-        }
+input {
+    padding: 10px;
+    width: 55%;
+    border-radius: 8px;
+    border: none;
+}
 
-        button {
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            background: cyan;
-            cursor: pointer;
-            margin: 5px;
-        }
-    </style>
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: cyan;
+    cursor: pointer;
+    margin: 5px;
+}
+</style>
 </head>
 
 <body>
 
-<h1>🤖 Adarsh AI Assistant</h1>
+<h1>🤖 My AI Chat</h1>
 
 <div id="chatbox"></div>
 
-<input type="text" id="userInput" placeholder="Ask me anything...">
+<input type="text" id="userInput" placeholder="Type message...">
+
 <button onclick="send()">Send</button>
+<button onclick="startVoice()">🎤 Speak</button>
 <button onclick="clearChat()">Clear Chat</button>
-<button onclick="toggleVoice()">🔊 Speak</button>
 
 <script>
 
-// 🔹 Load saved chat
+// 🔹 Load chat
 window.onload = function () {
     let saved = localStorage.getItem("chat");
     if (saved) {
@@ -66,8 +67,9 @@ window.onload = function () {
 };
 
 // 🔹 Send message
-function send() {
-    let input = document.getElementById("userInput").value.trim();
+function send(msgFromVoice = null) {
+
+    let input = msgFromVoice || document.getElementById("userInput").value.trim();
     if (input === "") return;
 
     let chatbox = document.getElementById("chatbox");
@@ -77,28 +79,27 @@ function send() {
     document.getElementById("userInput").value = "";
 
     // Typing animation
-    chatbox.innerHTML += `<div class="bot" id="typing">⏳ Bot is typing...</div>`;
+    chatbox.innerHTML += `<div class="bot" id="typing">⏳ Typing...</div>`;
     scrollDown();
 
     setTimeout(() => {
+
         document.getElementById("typing").remove();
 
         let reply = getReply(input);
 
         chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
 
-        // Speak if enabled
-        if (voiceOn) speak(reply);
+        speak(reply); // 🔊 always speak
 
-        // Save chat
         localStorage.setItem("chat", chatbox.innerHTML);
 
         scrollDown();
 
-    }, 800);
+    }, 700);
 }
 
-// 🔹 Smart reply system
+// 🔹 Reply logic
 function getReply(msg) {
     msg = msg.toLowerCase();
 
@@ -108,13 +109,12 @@ function getReply(msg) {
     if (msg.includes("kaise ho") || msg.includes("how are you"))
         return "Main mast hu 😎 Tum batao?";
 
+    if (msg.includes("tum kon ho"))
+        return "Main tumhara AI chatbot hu 🤖";
+
     if (msg.includes("who made you") || msg.includes("kisne banaya"))
         return "Mujhe Adarsh ne banaya hai 😎🔥";
 
-    if (msg.includes("tum kon ho"))
-        return "Main tumhara AI assistant hu 🤖";
-
-    // Random replies
     let replies = [
         "🤔 Thoda aur clearly pucho",
         "😅 Samajh nahi aaya",
@@ -125,40 +125,55 @@ function getReply(msg) {
     return replies[Math.floor(Math.random() * replies.length)];
 }
 
+// 🔹 Voice input (MAIN FIX)
+function startVoice() {
+
+    let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+    recognition.lang = "en-IN";
+    recognition.start();
+
+    recognition.onstart = function () {
+        alert("🎤 Listening...");
+    };
+
+    recognition.onresult = function (event) {
+        let voiceText = event.results[0][0].transcript;
+        send(voiceText); // 👈 direct send
+    };
+
+    recognition.onerror = function () {
+        alert("Voice error 😢 Try again");
+    };
+}
+
+// 🔹 Voice output
+function speak(text) {
+    let speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-IN";
+    window.speechSynthesis.speak(speech);
+}
+
 // 🔹 Clear chat
 function clearChat() {
     localStorage.removeItem("chat");
     document.getElementById("chatbox").innerHTML = "";
 }
 
-// 🔹 Enter key support
+// 🔹 Enter key
 document.getElementById("userInput").addEventListener("keypress", function(e) {
     if (e.key === "Enter") {
         send();
     }
 });
 
-// 🔹 Smooth scroll
+// 🔹 Scroll
 function scrollDown() {
     let chatbox = document.getElementById("chatbox");
     chatbox.scrollTo({
         top: chatbox.scrollHeight,
         behavior: "smooth"
     });
-}
-
-// 🔹 Voice system
-let voiceOn = false;
-
-function toggleVoice() {
-    voiceOn = !voiceOn;
-    alert(voiceOn ? "Voice ON 🔊" : "Voice OFF 🔇");
-}
-
-function speak(text) {
-    let speech = new SpeechSynthesisUtterance(text);
-    speech.lang = "en-US";
-    window.speechSynthesis.speak(speech);
 }
 
 </script>
