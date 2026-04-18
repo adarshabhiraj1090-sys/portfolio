@@ -133,6 +133,15 @@ function send() {
     if (msg.includes("who made you") || msg.includes("kisne banaya"))
         return "Mujhe Adarsh ne banaya hai 😎🔥";
 
+     let replies = [
+    "🤔 Thoda aur clearly pucho",
+    "😅 Samajh nahi aaya",
+    "👀 Interesting hai, aur batao",
+    "😎 Ye thoda tough hai"
+];
+
+return replies[Math.floor(Math.random() * replies.length)];
+
     if (msg.includes("kya kar rahe ho"))
         return "Main tumse baat kar raha hu 😄";
 
@@ -141,6 +150,15 @@ function send() {
 
     return "🤖 Samajh nahi aaya 😅 thoda simple pucho";
  }
+
+    if (msg.includes("name"))
+    return "Mera naam Adarsh AI Assistant hai 🤖";
+
+if (msg.includes("time"))
+    return new Date().toLocaleTimeString();
+
+if (msg.includes("date"))
+    return new Date().toLocaleDateString();
     
 function clearChat() {
     localStorage.removeItem("chat");
