@@ -109,26 +109,41 @@ window.onload = function () {
 };
 
 // 🔹 Send message
-function send() {
-    let input = document.getElementById("userInput").value;
+function send(msgFromVoice = null) {
+
+    let input = msgFromVoice || document.getElementById("userInput").value.trim();
     if (input === "") return;
 
     let chatbox = document.getElementById("chatbox");
 
     chatbox.innerHTML += `<div class="user">You: ${input}</div>`;
 
-    let reply = getReply(input);
-
-    chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
-
-    
-// 🔊 Voice reply
-speak(reply);
-
     document.getElementById("userInput").value = "";
 
-    chatbox.scrollTop = chatbox.scrollHeight;
+    // Typing animation
+    chatbox.innerHTML += `<div class="bot" id="typing">🤖 Typing...</div>`;
+    scrollDown();
+
+    setTimeout(() => {
+
+        document.getElementById("typing").remove();
+
+        let reply = getReply(input);
+
+        chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
+
+        if (isVoice) {
+    speak(reply);
+    isVoice = false;
+        }
+
+        localStorage.setItem("chat", chatbox.innerHTML);
+
+        scrollDown();
+
+    }, 700);
 }
+
 // 🔹 Reply logic
 function getReply(msg) {
     msg = msg.toLowerCase();
