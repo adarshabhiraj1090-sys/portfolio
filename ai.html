@@ -99,6 +99,7 @@ function send() {
 
         // Real reply show karo
         chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
+        speak(reply);
 
         // Save chat
         localStorage.setItem("chat", chatbox.innerHTML);
@@ -170,6 +171,15 @@ function startVoice() {
         alert("❌ Voice error, try again");
     };
 }
+
+ function speak(text) {
+    let speech = new SpeechSynthesisUtterance();
+    speech.text = text;
+    speech.lang = "en-IN"; // Hindi + English support
+    speech.rate = 1;
+
+    window.speechSynthesis.speak(speech);
+ }
 
 </script>
 </body>
