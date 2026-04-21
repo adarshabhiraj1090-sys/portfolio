@@ -94,6 +94,7 @@ button {
     <button onclick="send()">➤</button>
     <button onclick="startVoice()">🎤</button>
     <button onclick="clearChat()">🗑️</button>
+    <button onclick="startJarvis()">🤖 Jarvis</button>
 </div>
 
 <script>
@@ -148,23 +149,32 @@ function send(msgFromVoice = null) {
 function getReply(msg) {
     msg = msg.toLowerCase();
 
+    if (msg.includes("time")) {
+        let time = new Date().toLocaleTimeString();
+        return "⏰ Time is " + time;
+    }
+
+    if (msg.includes("open youtube")) {
+        window.open("https://youtube.com");
+        return "📺 Opening YouTube";
+    }
+
+    if (msg.includes("open google")) {
+        window.open("https://google.com");
+        return "🌐 Opening Google";
+    }
+
     if (msg.includes("hello") || msg.includes("hi"))
         return "Hello 👋 Kaise ho?";
 
-    if (msg.includes("kaise ho") || msg.includes("how are you"))
-        return "Main mast hu 😎 Tum batao?";
-
-    if (msg.includes("tum kon ho"))
-        return "Main tumhara AI chatbot hu 🤖";
-
-    if (msg.includes("who made you") || msg.includes("kisne banaya"))
+    if (msg.includes("who made you"))
         return "Mujhe Adarsh ne banaya hai 😎🔥";
 
     let replies = [
         "🤔 Thoda aur clearly pucho",
         "😅 Samajh nahi aaya",
-        "👀 Interesting hai, aur batao",
-        "😎 Ye thoda tough hai"
+        "👀 Interesting hai",
+        "😎 Nice question"
     ];
 
     return replies[Math.floor(Math.random() * replies.length)];
@@ -220,6 +230,23 @@ function scrollDown() {
         top: chatbox.scrollHeight,
         behavior: "smooth"
     });
+}
+function startJarvis() {
+
+    let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = "en-US"; // या hi-IN
+    recognition.continuous = true;
+
+    recognition.onresult = function(event) {
+        let last = event.results.length - 1;
+        let text = event.results[last][0].transcript;
+
+        document.getElementById("userInput").value = text;
+
+        send(); // auto send
+    };
+
+    recognition.start();
 }
 
 </script>
