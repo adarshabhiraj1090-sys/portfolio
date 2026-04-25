@@ -32,26 +32,23 @@ h1 {
 
 /* Messages */
 .user {
-    display: block;
-    text-align: right;
-    background: #00c6ff;
-    color: black;
-    padding: 8px;
-    border-radius: 10px;
+    background: #00bcd4;
+    padding: 8px 12px;
+    border-radius: 15px;
+    display: inline-block;
     margin: 5px;
-    margin-left: auto;
-    max-width: 70%;
+    float: right;
+    clear: both;
 }
 
 .bot {
-    display: block;
-    text-align: left;
-    background: #333;
-    padding: 8px;
-    border-radius: 10px;
+    background: #444;
+    padding: 8px 12px;
+    border-radius: 15px;
+    display: inline-block;
     margin: 5px;
-    margin-right: auto;
-    max-width: 70%;
+    float: left;
+    clear: both;
 }
 /* Input area */
 .input-area {
@@ -149,35 +146,31 @@ function send(msgFromVoice = null) {
 function getReply(msg) {
     msg = msg.toLowerCase();
 
-    if (msg.includes("time")) {
-        let time = new Date().toLocaleTimeString();
-        return "⏰ Time is " + time;
+    let replies = {
+        "hello": ["Hello 👋 Kaise ho?", "Hi 😄 Kya haal hai?", "Hey! 👋"],
+        "hi": ["Hi 😄", "Hello 👋", "Hey bro 😎"],
+        "how are you": ["Main mast hu 😎 Tum batao?", "Sab badhiya 👍"],
+        "kaise ho": ["Main mast hu 😎 Tum batao?", "Badiya hu 😄"],
+        "who made you": ["Mujhe Adarsh ne banaya hai 😎🔥"],
+        "tum kon ho": ["Main tumhara AI assistant hu 🤖"],
+        "help": ["Main coding, basic questions me help kar sakta hu 💻"]
+    };
+
+    for (let key in replies) {
+        if (msg.includes(key)) {
+            let arr = replies[key];
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
     }
 
-    if (msg.includes("open youtube")) {
-        window.open("https://youtube.com");
-        return "📺 Opening YouTube";
-    }
-
-    if (msg.includes("open google")) {
-        window.open("https://google.com");
-        return "🌐 Opening Google";
-    }
-
-    if (msg.includes("hello") || msg.includes("hi"))
-        return "Hello 👋 Kaise ho?";
-
-    if (msg.includes("who made you"))
-        return "Mujhe Adarsh ne banaya hai 😎";
-
-    let replies = [
+    let defaultReplies = [
         "🤔 Thoda aur clearly pucho",
         "😅 Samajh nahi aaya",
-        "👀 Interesting hai",
-        "😎 Nice question"
+        "👀 Interesting hai, aur batao",
+        "😎 Ye thoda tough hai"
     ];
 
-    return replies[Math.floor(Math.random() * replies.length)];
+    return defaultReplies[Math.floor(Math.random() * defaultReplies.length)];
 }
 
 // 🔹 Voice input (MAIN FIX)
