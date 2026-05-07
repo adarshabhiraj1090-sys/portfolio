@@ -130,6 +130,11 @@ function send(msgFromVoice = null) {
 
         chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
 
+        chatbox.scrollTo({
+    top: chatbox.scrollHeight,
+    behavior: "smooth"
+});
+
         if (isVoice) {
     speak(reply);
     isVoice = false;
@@ -145,6 +150,13 @@ function send(msgFromVoice = null) {
 // 🔹 Reply logic
 function getReply(msg) {
     msg = msg.toLowerCase();
+
+    let nameReply = saveName(msg);
+if (nameReply) return nameReply;
+
+if (msg.includes("who am i")) {
+    return userName ? `Tum ${userName} ho 😎` : "Mujhe tumhara naam nahi pata 😅";
+}
 
     let replies = {
         "hello": ["Hello 👋 Kaise ho?", "Hi 😄 Kya haal hai?", "Hey! 👋"],
@@ -244,6 +256,15 @@ function startJarvis() {
     };
 
     recognition.start();
+}
+let userName = localStorage.getItem("name") || "";
+
+function saveName(msg) {
+    if (msg.includes("my name is")) {
+        userName = msg.split("my name is")[1].trim();
+        localStorage.setItem("name", userName);
+        return `Nice to meet you ${userName} 😊`;
+    }
 }
 
 </script>
