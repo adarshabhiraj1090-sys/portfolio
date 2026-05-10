@@ -1,0 +1,18 @@
+chatbox.innerHTML += `<div class="bot" id="typing">Bot is typing...</div>`;
+
+setTimeout(() => {
+
+    document.getElementById("typing").remove();
+
+    chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
+
+    speak(reply);
+
+    localStorage.setItem("chat", chatbox.innerHTML);
+
+    chatbox.scrollTo({
+        top: chatbox.scrollHeight,
+        behavior: "smooth"
+    });
+
+}, 1000);
