@@ -164,44 +164,66 @@ setTimeout(() => {
 
 // 🔹 Reply logic
 function getReply(msg) {
+
     msg = msg.toLowerCase();
 
-    let nameReply = saveName(msg);
-if (nameReply) return nameReply;
+    // Greetings
+    if (msg.includes("hi") || msg.includes("hello"))
+        return "Hello 👋 Kaise ho?";
 
-if (msg.includes("who am i")) {
-    return userName ? `Tum ${userName} ho 😎` : "Mujhe tumhara naam nahi pata 😅";
-}
+    if (msg.includes("kaise ho"))
+        return "Main mast hu 😎 Tum batao?";
 
-    let replies = {
-        "hello": ["Hello 👋 Kaise ho?", "Hi 😄 Kya haal hai?", "Hey! 👋"],
-        "hi": ["Hi 😄", "Hello 👋", "Hey bro 😎"],
-        "how are you": ["Main mast hu 😎 Tum batao?", "Sab badhiya 👍"],
-        "kaise ho": ["Main mast hu 😎 Tum batao?", "Badiya hu 😄"],
-        "who made you": [
-    "Mujhe Adarsh ne banaya hai 😎🔥",
-    "Adarsh is my creator 😎",
-    "Main Adarsh ka AI assistant hu 🤖"
-],
-        "tum kon ho": ["Main tumhara AI assistant hu 🤖"],
-        "help": ["Main coding, basic questions me help kar sakta hu 💻"]
-    };
+    // Name
+    if (msg.includes("tum kon ho"))
+        return "Main Adarsh ka AI Assistant hu 🤖";
 
-    for (let key in replies) {
-        if (msg.includes(key)) {
-            let arr = replies[key];
-            return arr[Math.floor(Math.random() * arr.length)];
-        }
-    }
+    if (msg.includes("mera naam"))
+        return "Tum Adarsh ho 😎🔥";
 
-    let defaultReplies = [
+    // Coding
+    if (msg.includes("coding"))
+        return "Coding daily practice se aati hai 💻🔥";
+
+    // Rich
+    if (msg.includes("rich") || msg.includes("paisa"))
+        return "Bada aadmi banne ke liye skills + consistency chahiye 🚀";
+
+    // Elon Musk
+    if (msg.includes("elon musk"))
+        return "Elon Musk duniya ke top innovators me se ek hai 🚀";
+
+    // Help
+    if (msg.includes("help"))
+        return "Main tumhari help ke liye hu 😄";
+
+    // Time
+    if (msg.includes("time"))
+        return "Mujhe exact time nahi pata 😅";
+
+    // Who made you
+    if (msg.includes("who made you") || msg.includes("kisne banaya"))
+        return "Mujhe Adarsh ne banaya hai 😎🔥";
+
+    // Motivation
+    if (msg.includes("motivate"))
+        return "Never give up 🔥 Tum bahut bada kar sakte ho";
+
+    // Bye
+    if (msg.includes("bye"))
+        return "Bye 👋 Fir milte hain";
+
+    // Default random replies
+    let replies = [
         "🤔 Thoda aur clearly pucho",
         "😅 Samajh nahi aaya",
         "👀 Interesting hai, aur batao",
-        "😎 Ye thoda tough hai"
+        "😎 Ye thoda tough hai",
+        "🔥 Accha question hai",
+        "🤖 Main seekh raha hu"
     ];
 
-    return defaultReplies[Math.floor(Math.random() * defaultReplies.length)];
+    return replies[Math.floor(Math.random() * replies.length)];
 }
 
 // 🔹 Voice input (MAIN FIX)
