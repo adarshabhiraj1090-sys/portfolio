@@ -179,48 +179,47 @@ function getReply(msg) {
         return "Main Adarsh ka AI Assistant hu 🤖";
 
     if (msg.includes("mera naam"))
-        return "Tum Adarsh ho 😎🔥";
+        return "main Adarsh ke duara banaya gaya ai assistant ho ";
 
     // Coding
-    if (msg.includes("coding"))
-        return "Coding daily practice se aati hai 💻🔥";
+    if (msg.includes("mujhe coding sekhna hai"))
+        return "Coding daily practice se aati hai 💻";
 
     // Rich
-    if (msg.includes("rich") || msg.includes("paisa"))
+    if (msg.includes("rich/bada aadmi kise bane") || msg.includes("paisa"))
         return "Bada aadmi banne ke liye skills + consistency chahiye 🚀";
 
     // Elon Musk
-    if (msg.includes("elon musk"))
+    if (msg.includes("elon musk kon hai"))
         return "Elon Musk duniya ke top innovators me se ek hai 🚀";
 
     // Help
-    if (msg.includes("help"))
-        return "Main tumhari help ke liye hu 😄";
+    if (msg.includes("please help me"))
+        return "bilkul main aapki kya help kar sakta hu 🗣️";
 
     // Time
     if (msg.includes("time"))
-        return "Mujhe exact time nahi pata 😅";
+        return "Mujhe exact time nahi pata 😊";
 
     // Who made you
     if (msg.includes("who made you") || msg.includes("kisne banaya"))
-        return "Mujhe Adarsh ne banaya hai 😎🔥";
+        return "Mujhe Adarsh ne banaya hai 😎";
 
     // Motivation
-    if (msg.includes("motivate"))
-        return "Never give up 🔥 Tum bahut bada kar sakte ho";
+    if (msg.includes("motivate matalab kya ho hai"))
+        return "Never give up  Tum bahut bada kar sakte ho";
 
     // Bye
     if (msg.includes("bye"))
-        return "Bye 👋 Fir milte hain";
+        return "Bye 👋 take care,and hit me up anytime you want to chat or need help be something🚀";
 
     // Default random replies
     let replies = [
         "🤔 Thoda aur clearly pucho",
-        "😅 Samajh nahi aaya",
-        "👀 Interesting hai, aur batao",
-        "😎 Ye thoda tough hai",
-        "🔥 Accha question hai",
-        "🤖 Main seekh raha hu"
+        " Samajh nahi aaya",
+        "👀 Interesting hai, sorry i couldn't understand 😔",
+        
+        "🤖 Main abhi sirf basic level janta hu"
     ];
 
     return replies[Math.floor(Math.random() * replies.length)];
