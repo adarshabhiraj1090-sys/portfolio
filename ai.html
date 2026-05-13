@@ -126,10 +126,30 @@ function send(msgFromVoice = null) {
 
         document.getElementById("typing").remove();
 
-        let reply = getReply(input);
+        chatbox.innerHTML += `<div class="bot" id="typing">⏳ Typing...</div>`;
 
-        chatbox.innerHTML += `<div class="bot" id="typing">Bot is typing...</div>`;
+chatbox.scrollTo({
+    top: chatbox.scrollHeight,
+    behavior: "smooth"
+});
 
+setTimeout(() => {
+
+    document.getElementById("typing").remove();
+
+    let reply = getReply(input);
+
+    chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
+
+    localStorage.setItem("chat", chatbox.innerHTML);
+
+    chatbox.scrollTo({
+        top: chatbox.scrollHeight,
+        behavior: "smooth"
+    });
+
+}, 1500);
+        
 setTimeout(() => {
 
     document.getElementById("typing").remove();
