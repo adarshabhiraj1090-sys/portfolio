@@ -105,6 +105,20 @@ button {
     margin-left:10px;
     margin-bottom:5px;
 }
+
+.light-mode{
+    background:white;
+    color:black;
+}
+
+.light-mode #chatbox{
+    background:#f1f1f1;
+}
+
+.light-mode .bot{
+    background:#ddd;
+    color:black;
+}
     
 </style>
 
@@ -115,6 +129,8 @@ button {
 <h1>🤖 Adarsh AI Assistant</h1>
 
 <div id="status">🟢 Online</div>
+
+<button onclick="toggleMode()">🌙 Mode</button>
 
 <div id="chatbox"></div>
 
@@ -366,6 +382,12 @@ document.getElementById("userInput")
     }
 
 });
+
+function toggleMode(){
+
+    document.body.classList.toggle("light-mode");
+
+}
 
 </script>
 
