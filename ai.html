@@ -83,6 +83,29 @@ button {
     margin: 5px;
     cursor: pointer;
 }
+
+.message{
+    animation: pop 0.3s ease;
+}
+
+@keyframes pop{
+    from{
+        transform: scale(0.8);
+        opacity:0;
+    }
+    to{
+        transform: scale(1);
+        opacity:1;
+    }
+}
+
+#status{
+    color:#00ff99;
+    font-size:14px;
+    margin-left:10px;
+    margin-bottom:5px;
+}
+    
 </style>
 
 </head>
@@ -90,6 +113,8 @@ button {
 <body>
 
 <h1>🤖 Adarsh AI Assistant</h1>
+
+<div id="status">🟢 Online</div>
 
 <div id="chatbox"></div>
 
@@ -312,6 +337,15 @@ function saveName(msg) {
         return `Nice to meet you ${userName} 😊`;
     }
 }
+
+document.getElementById("userInput")
+.addEventListener("keypress", function(e){
+
+    if(e.key === "Enter"){
+        send();
+    }
+
+});
 
 </script>
 
