@@ -50,6 +50,13 @@ h1 {
     float: left;
     clear: both;
 }
+
+ .time{
+    font-size:10px;
+    opacity:0.7;
+    margin-top:4px;
+ }
+
 /* Input area */
 .input-area {
     position: fixed;
@@ -110,11 +117,21 @@ window.onload = function () {
 function send(msgFromVoice = null) {
 
     let input = msgFromVoice || document.getElementById("userInput").value.trim();
+
+    let time = new Date().toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit'
+});
+    
     if (input === "") return;
 
     let chatbox = document.getElementById("chatbox");
 
-    chatbox.innerHTML += `<div class="user">You: ${input}</div>`;
+    chatbox.innerHTML += `
+<div class="user">
+You: ${input}
+<div class="time">${time}</div>
+</div>`;
 
     document.getElementById("userInput").value = "";
 
@@ -141,7 +158,11 @@ setTimeout(() => {
 
     let reply = getReply(input);
 
-    chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
+    chatbox.innerHTML += `
+<div class="bot">
+Bot: ${reply}
+<div class="time">${time}</div>
+</div>`;
 
     localStorage.setItem("chat", chatbox.innerHTML);
 
