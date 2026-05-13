@@ -177,7 +177,31 @@ setTimeout(() => {
 
     document.getElementById("typing").remove();
 
-    chatbox.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
+    setTimeout(() => {
+
+    document.getElementById("typing").remove();
+
+    chatbox.innerHTML += `
+    <div class="bot">
+        Bot: ${reply}
+        <div style="font-size:10px;opacity:0.7;">
+            ${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}
+        </div>
+    </div>`;
+
+    // voice only for mic
+    if (msgFromVoice) {
+        speak(reply);
+    }
+
+    localStorage.setItem("chat", chatbox.innerHTML);
+
+    chatbox.scrollTo({
+        top: chatbox.scrollHeight,
+        behavior: "smooth"
+    });
+
+}, 1500);
 
     localStorage.setItem("chat", chatbox.innerHTML);
 
