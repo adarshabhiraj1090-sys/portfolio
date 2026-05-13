@@ -196,7 +196,27 @@ function send(msgFromVoice = "") {
 // 🔹 Reply logic
 function getReply(msg) {
 
+let savedName = localStorage.getItem("username");
+
     msg = msg.toLowerCase();
+
+    if(msg.includes("my name is")){
+
+    let name = msg.replace("my name is", "").trim();
+
+    localStorage.setItem("username", name);
+
+    return `Nice to meet you ${name} 😎`;
+}
+
+if(msg.includes("what is my name")){
+
+    if(savedName){
+        return `Your name is ${savedName} 😊`;
+    }else{
+        return "Mujhe abhi tumhara naam nahi pata 😅";
+    }
+}
 
     // Greetings
     if (msg.includes("hi") || msg.includes("hello"))
