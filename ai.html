@@ -126,6 +126,8 @@ function send(msgFromVoice = null) {
 
         document.getElementById("typing").remove();
 
+        let reply = getReply(input);
+
         chatbox.innerHTML += `<div class="bot" id="typing">⏳ Typing...</div>`;
 
 chatbox.scrollTo({
