@@ -114,119 +114,58 @@ window.onload = function () {
 };
 
 // 🔹 Send message
-function send(msgFromVoice = null) {
+function send(msgFromVoice = "") {
 
     let input = msgFromVoice || document.getElementById("userInput").value.trim();
 
-    let time = new Date().toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit'
-});
-    
     if (input === "") return;
 
     let chatbox = document.getElementById("chatbox");
 
+    // USER MESSAGE
     chatbox.innerHTML += `
-<div class="user">
-You: ${input}
-<div class="time">${time}</div>
-</div>`;
+    <div class="user">
+        You: ${input}
+        <div style="font-size:10px;">
+            ${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2,'0')}
+        </div>
+    </div>`;
 
+    // INPUT CLEAR
     document.getElementById("userInput").value = "";
 
-    // Typing animation
-    chatbox.innerHTML += `<div class="bot" id="typing">🤖 Typing...</div>`;
-    scrollDown();
+    // TYPING
+    chatbox.innerHTML += `
+    <div class="bot" id="typing">
+        ⏳ Typing...
+    </div>`;
 
+    chatbox.scrollTo({
+        top: chatbox.scrollHeight,
+        behavior: "smooth"
+    });
+
+    // BOT REPLY
     setTimeout(() => {
 
         document.getElementById("typing").remove();
 
         let reply = getReply(input);
 
-        chatbox.innerHTML += `<div class="bot" id="typing">⏳ Typing...</div>`;
+        chatbox.innerHTML += `
+        <div class="bot">
+            Bot: ${reply}
+        </div>`;
 
-chatbox.scrollTo({
-    top: chatbox.scrollHeight,
-    behavior: "smooth"
-});
+        chatbox.scrollTo({
+            top: chatbox.scrollHeight,
+            behavior: "smooth"
+        });
 
-setTimeout(() => {
-
-    document.getElementById("typing").remove();
-
-    let reply = getReply(input);
-
-    chatbox.innerHTML += `
-<div class="bot">
-Bot: ${reply}
-<div class="time">${time}</div>
-</div>`;
-
-    localStorage.setItem("chat", chatbox.innerHTML);
-
-    chatbox.scrollTo({
-        top: chatbox.scrollHeight,
-        behavior: "smooth"
-    });
-
-}, 1500);
-        
-setTimeout(() => {
-
-    document.getElementById("typing").remove();
-
-    setTimeout(() => {
-
-    document.getElementById("typing").remove();
-
-    chatbox.innerHTML += `
-    <div class="bot">
-        Bot: ${reply}
-        <div style="font-size:10px;opacity:0.7;">
-            ${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}
-        </div>
-    </div>`;
-
-    // voice only for mic
-    if (msgFromVoice) {
-        speak(reply);
-    }
-
-    localStorage.setItem("chat", chatbox.innerHTML);
-
-    chatbox.scrollTo({
-        top: chatbox.scrollHeight,
-        behavior: "smooth"
-    });
-
-}, 1500);
-
-    localStorage.setItem("chat", chatbox.innerHTML);
-
-    chatbox.scrollTo({
-        top: chatbox.scrollHeight,
-        behavior: "smooth"
-    });
-
-}, 1000);
-        
-    chatbox.scrollTo({
-    top: chatbox.scrollHeight,
-    behavior: "smooth"
-});
-
-        if (isVoice) {
-    speak(reply);
-    isVoice = false;
-        }
-
+        // SAVE CHAT
         localStorage.setItem("chat", chatbox.innerHTML);
 
-        scrollDown();
-
-    }, 700);
+    }, 1000);
 }
 
 // 🔹 Reply logic
