@@ -332,7 +332,9 @@ function send(msgFromVoice = "") {
         <div style="font-size:10px;">
             ${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2,'0')}
         </div>
-    </div>`;
+        
+        </div>
+        `;
 
     // INPUT CLEAR
     document.getElementById("userInput").value = "";
@@ -366,7 +368,8 @@ function send(msgFromVoice = "") {
         })}
         </div>
             
-        </div>`;
+        </div>
+        `;
 
         if(msgFromVoice){
     speak(reply);
