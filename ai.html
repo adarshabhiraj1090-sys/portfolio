@@ -381,14 +381,45 @@ function startVoice() {
 // 🔹 Voice output
  function speak(text){
 
+    speechSynthesis.cancel();
+
     let speech = new SpeechSynthesisUtterance(text);
 
-    let voices = speechSynthesis.getVoices();
+    let voices = window.speechSynthesis.getVoices();
 
-    let selectedVoice =
+    let selected =
     document.getElementById("voiceSelect").value;
 
-    speech.voice = voices[selectedVoice];
+    // Default
+    if(selected == "0"){
+        speech.voice = voices[0];
+    }
+
+    // Female
+    else if(selected == "1"){
+
+        let femaleVoice =
+        voices.find(v =>
+            v.name.toLowerCase().includes("female") ||
+            v.name.toLowerCase().includes("zira") ||
+            v.name.toLowerCase().includes("samantha")
+        );
+
+        speech.voice = femaleVoice || voices[1];
+    }
+
+    // Male
+    else if(selected == "2"){
+
+        let maleVoice =
+        voices.find(v =>
+            v.name.toLowerCase().includes("male") ||
+            v.name.toLowerCase().includes("david") ||
+            v.name.toLowerCase().includes("alex")
+        );
+
+        speech.voice = maleVoice || voices[2];
+    }
 
     speech.rate = 1;
 
@@ -495,6 +526,10 @@ document.getElementById("imageInput").addEventListener("change", function(){
     reader.readAsDataURL(file);
 
 });
+
+speechSynthesis.onvoiceschanged = () => {
+    speechSynthesis.getVoices();
+};
 
 </script>
 
