@@ -146,6 +146,12 @@ button {
     font-size:12px;
     color:lightgreen;
 }
+
+.chat-image{
+    width:200px;
+    border-radius:10px;
+    margin-top:5px;
+}
     
 </style>
 
@@ -175,6 +181,7 @@ button {
     <button onclick="send()">➤</button>
     <button onclick="startVoice()">🎤</button>
     <button onclick="clearChat()">🗑️</button>
+    <input type="file" id="imageInput" accept="image/*">
     <button onclick="startJarvis()">🤖 Jarvis</button>
 </div>
 
@@ -320,7 +327,7 @@ if(msg.includes("what is my name")){
     let replies = [
         "🤔 Thoda aur clearly pucho",
         " Samajh nahi aaya",
-        "👀 Interesting hai, sorry i couldn't understand 😔",
+        " sorry i couldn't understand 😔",
         
         "🤖 Main abhi sirf basic level janta hu"
     ];
@@ -424,6 +431,36 @@ function toggleMode(){
     document.body.classList.toggle("light-mode");
 
 }
+
+document.getElementById("imageInput").addEventListener("change", function(){
+
+    let file = this.files[0];
+
+    if(!file) return;
+
+    let reader = new FileReader();
+
+    reader.onload = function(e){
+
+        let chatbox = document.getElementById("chatbox");
+
+        chatbox.innerHTML += `
+        <div class="user">
+            <img src="${e.target.result}" class="chat-image">
+        </div>
+        `;
+
+        chatbox.scrollTo({
+            top: chatbox.scrollHeight,
+            behavior: "smooth"
+        });
+
+        localStorage.setItem("chat", chatbox.innerHTML);
+    };
+
+    reader.readAsDataURL(file);
+
+});
 
 </script>
 
