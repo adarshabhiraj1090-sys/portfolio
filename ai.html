@@ -160,6 +160,16 @@ button {
     background:cyan;
     border:none;
 }
+
+#emojiBox{
+    margin:10px;
+}
+
+#emojiBox span{
+    font-size:25px;
+    cursor:pointer;
+    margin:5px;
+}
     
 </style>
 
@@ -193,6 +203,21 @@ button {
 </select>
 
 <div id="chatbox"></div>
+<div id="emojiBox">
+
+<span onclick="addEmoji('😀')">😀</span>
+
+<span onclick="addEmoji('😂')">😂</span>
+
+<span onclick="addEmoji('🔥')">🔥</span>
+
+<span onclick="addEmoji('😎')">😎</span>
+
+<span onclick="addEmoji('❤️')">❤️</span>
+
+</div>
+
+<input type="text" id="userInput" placeholder="Type message...">
 
 <div class="input-area">
     <input type="file"
@@ -538,6 +563,12 @@ document.getElementById("imageInput").addEventListener("change", function(){
 speechSynthesis.onvoiceschanged = () => {
     speechSynthesis.getVoices();
 };
+
+function addEmoji(emoji){
+
+document.getElementById("userInput").value += emoji;
+
+}
 
 </script>
 
