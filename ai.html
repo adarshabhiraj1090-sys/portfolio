@@ -195,7 +195,10 @@ button {
 <div id="chatbox"></div>
 
 <div class="input-area">
-    <input type="text" id="userInput" placeholder="Type message...">
+    <input type="file"
+id="imageInput"
+accept="image/*"
+capture="environment">
     <button onclick="send()">➤</button>
     <button onclick="startVoice()">🎤</button>
     <button onclick="clearChat()">🗑️</button>
