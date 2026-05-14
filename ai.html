@@ -152,6 +152,14 @@ button {
     border-radius:10px;
     margin-top:5px;
 }
+
+#voiceSelect{
+    padding:5px;
+    border-radius:10px;
+    margin:5px;
+    background:cyan;
+    border:none;
+}
     
 </style>
 
@@ -173,6 +181,16 @@ button {
 <div id="status">🟢 Online</div>
 
 <button onclick="toggleMode()">🌙 Mode</button>
+
+<select id="voiceSelect">
+
+<option value="0">🤖 Default</option>
+
+<option value="1">👩 Female</option>
+
+<option value="2">😎 Male</option>
+
+</select>
 
 <div id="chatbox"></div>
 
@@ -359,11 +377,25 @@ function startVoice() {
 }
 
 // 🔹 Voice output
-function speak(text) {
+ function speak(text){
+
     let speech = new SpeechSynthesisUtterance(text);
-    speech.lang = "en-IN";
-    window.speechSynthesis.speak(speech);
-}
+
+    let voices = speechSynthesis.getVoices();
+
+    let selectedVoice =
+    document.getElementById("voiceSelect").value;
+
+    speech.voice = voices[selectedVoice];
+
+    speech.rate = 1;
+
+    speech.pitch = 1;
+
+    speech.volume = 1;
+
+    speechSynthesis.speak(speech);
+ }
 
 // 🔹 Clear chat
 function clearChat() {
