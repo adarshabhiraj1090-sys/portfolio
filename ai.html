@@ -321,6 +321,14 @@ function send(msgFromVoice = "") {
     chatbox.innerHTML += `
     <div class="user">
         You: ${input}
+
+        <div style="font-size:10px;opacity:0.7;">
+        ${new Date().toLocaleTimeString([], {
+        hour:'2-digit',
+        minute:'2-digit'
+        })}
+       </div>
+       
         <div style="font-size:10px;">
             ${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2,'0')}
         </div>
@@ -350,6 +358,14 @@ function send(msgFromVoice = "") {
         chatbox.innerHTML += `
         <div class="bot">
             Bot: ${reply}
+
+       <div style="font-size:10px;opacity:0.7;">
+       ${new Date().toLocaleTimeString([], {
+        hour:'2-digit',
+        minute:'2-digit'
+        })}
+        </div>
+            
         </div>`;
 
         if(msgFromVoice){
