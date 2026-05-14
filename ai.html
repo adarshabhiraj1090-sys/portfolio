@@ -302,6 +302,12 @@ window.onload = function () {
     }
 };
 
+if(localStorage.getItem("theme") === "light"){
+
+    document.body.classList.add("light-mode");
+
+}
+
 // 🔹 Send message
 function send(msgFromVoice = "") {
 
@@ -583,6 +589,16 @@ document.getElementById("userInput")
 function toggleMode(){
 
     document.body.classList.toggle("light-mode");
+
+    if(document.body.classList.contains("light-mode")){
+
+        localStorage.setItem("theme","light");
+
+    }else{
+
+        localStorage.setItem("theme","dark");
+
+    }
 
 }
 
