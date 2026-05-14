@@ -177,14 +177,33 @@ font-size:25px;
 .input-area{
 display:flex;
 align-items:center;
-gap:10px;
+gap:8px;
 padding:10px;
 flex-wrap:wrap;
+background:black;
+position:fixed;
+bottom:0;
+width:100%;
+}
+
+.input-area input[type="text"]{
+flex:1;
+padding:10px;
+border-radius:20px;
+border:none;
+}
+
+.input-area button{
+border:none;
+padding:10px;
+border-radius:50%;
+background:cyan;
 }
 
 input[type="file"]{
+font-size:11px;
 color:white;
-font-size:12px;
+width:120px;
 }
     
 </style>
@@ -236,18 +255,23 @@ font-size:12px;
 <input type="text" id="userInput" placeholder="Type message...">
 
 <div class="input-area">
-    <input type="file"
-id="imageInput"
-accept="image/*"
-capture="environment">
-    <button onclick="send()">➤</button>
-    <button onclick="startVoice()">🎤</button>
-    <button onclick="clearChat()">🗑️</button>
-    <input type="file"
-id="imageInput"
-accept="image/*"
-capture="environment">
-    <button onclick="startJarvis()">🤖 Jarvis</button>
+
+<input type="text" id="userInput" placeholder="Type message...">
+
+<button onclick="send()">➤</button>
+
+<button onclick="startVoice()">🎤</button>
+
+<button onclick="clearChat()">🗑️</button>
+
+<button onclick="toggleMode()">🌙</button>
+
+<button onclick="startJarvis()">🤖 Jarvis</button>
+
+<input type="file" id="imageInput" accept="image/*">
+
+<input type="file" id="cameraInput" accept="image/*" capture="environment">
+
 </div>
 
 <script>
