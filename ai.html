@@ -205,6 +205,16 @@ font-size:11px;
 color:white;
 width:120px;
 }
+
+.upload-btn{
+background:cyan;
+padding:10px;
+border-radius:50%;
+font-size:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
     
 </style>
 
@@ -268,9 +278,15 @@ width:120px;
 
 <button onclick="startJarvis()">🤖 Jarvis</button>
 
-<input type="file" id="imageInput" accept="image/*">
+<label class="upload-btn">
+🖼️
+<input type="file" id="imageInput" accept="image/*" hidden>
+</label>
 
-<input type="file" id="cameraInput" accept="image/*" capture="environment">
+<label class="upload-btn">
+📸
+<input type="file" id="cameraInput" accept="image/*" capture="environment" hidden>
+</label>
 
 </div>
 
