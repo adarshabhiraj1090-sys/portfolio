@@ -259,7 +259,9 @@ function send(msgFromVoice = "") {
             Bot: ${reply}
         </div>`;
 
-        speak(reply);
+        if(msgFromVoice){
+    speak(reply);
+        }
 
         chatbox.scrollTo({
             top: chatbox.scrollHeight,
