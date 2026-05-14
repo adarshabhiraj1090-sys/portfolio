@@ -39,6 +39,7 @@ h1 {
     margin: 5px;
     float: right;
     clear: both;
+    box-shadow: 0 0 10px rgba(0,255,255,0.5);
 }
 
 .bot {
@@ -49,6 +50,7 @@ h1 {
     margin: 5px;
     float: left;
     clear: both;
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
 }
 
  .time{
@@ -270,10 +272,10 @@ if(msg.includes("what is my name")){
 
     // Greetings
     if (msg.includes("hi") || msg.includes("hello"))
-        return "Hello 👋 Kaise ho?";
+        return "👋 Hello! Kaise ho? 😄";
 
     if (msg.includes("kaise ho"))
-        return "Main mast hu 😎 Tum batao?";
+        return "😎 Main mast hu! Tum kaise ho? 🤗";
 
     // Name
     if (msg.includes("tum kon ho"))
