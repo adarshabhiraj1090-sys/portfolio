@@ -320,7 +320,7 @@ async function send(msgFromVoice = "") {
 
     // USER MESSAGE
     chatbox.innerHTML += `
-    <div class="user">
+    <div class="user message">
         You: ${input}
         </div>
         `;
@@ -347,7 +347,7 @@ async function send(msgFromVoice = "") {
         let reply = await getReply(input);
 
         chatbox.innerHTML += `
-        <div class="bot">
+        <div class="bot message">
             Bot: ${reply}
         </div>
         `;
@@ -369,6 +369,8 @@ async function send(msgFromVoice = "") {
 
 // 🔹 Reply logic
 async function getReply(msg) {
+
+let savedName = localStorage.getItem("username");
 
     try {
 
@@ -408,6 +410,24 @@ async function getReply(msg) {
     } catch (error) {
 
         return "⚠️ AI error aa gaya";
+    }
+}
+
+if(msg.includes("my name is")){
+
+    let name = msg.replace("my name is", "").trim();
+
+    localStorage.setItem("username", name);
+
+    return `Nice to meet you ${name} 😎`;
+}
+
+if(msg.includes("what is my name")){
+
+    if(savedName){
+        return `Your name is ${savedName} 😊`;
+    }else{
+        return "Mujhe abhi tumhara naam nahi pata 😅";
     }
 }
 
