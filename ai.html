@@ -291,7 +291,7 @@ justify-content:center;
 
 <script>
 
-const API_KEY = "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";
+const API_KEY = "YOUR_API_KEY";
 
  let isVoice = false;
 
@@ -340,7 +340,7 @@ async function send(msgFromVoice = "") {
     });
 
     // BOT REPLY
-    setTimeout(() => {
+    setTimeout(async () => {
 
         document.getElementById("typing").remove();
 
