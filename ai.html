@@ -291,6 +291,8 @@ justify-content:center;
 
 <script>
 
+const API_KEY = "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";
+
  let isVoice = false;
 
 // 🔹 Load chat
@@ -308,7 +310,7 @@ if(localStorage.getItem("theme") === "light"){
 }
 
 // 🔹 Send message
-function send(msgFromVoice = "") {
+async function send(msgFromVoice = "") {
 
     let input = msgFromVoice || document.getElementById("userInput").value.trim();
 
@@ -342,7 +344,7 @@ function send(msgFromVoice = "") {
 
         document.getElementById("typing").remove();
 
-        let reply = getReply(input);
+        let reply = await getReply(input);
 
         chatbox.innerHTML += `
         <div class="bot">
@@ -366,86 +368,47 @@ function send(msgFromVoice = "") {
 }
 
 // 🔹 Reply logic
-function getReply(msg) {
+async function getReply(msg) {
 
-let savedName = localStorage.getItem("username");
+    try {
 
-    msg = msg.toLowerCase();
+        let response = await fetch(
+            "https://api.openai.com/v1/chat/completions",
+            {
+                method: "POST",
 
-    if(msg.includes("my name is")){
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${API_KEY}`
+                },
 
-    let name = msg.replace("my name is", "").trim();
+                body: JSON.stringify({
+                    model: "gpt-3.5-turbo",
 
-    localStorage.setItem("username", name);
+                    messages: [
+                        {
+                            role: "system",
+                            content: "You are Adarsh AI Assistant. Reply in friendly Hindi-English."
+                        },
+                        {
+                            role: "user",
+                            content: msg
+                        }
+                    ],
 
-    return `Nice to meet you ${name} 😎`;
-}
+                    max_tokens: 100
+                })
+            }
+        );
 
-if(msg.includes("what is my name")){
+        let data = await response.json();
 
-    if(savedName){
-        return `Your name is ${savedName} 😊`;
-    }else{
-        return "Mujhe abhi tumhara naam nahi pata 😅";
+        return data.choices[0].message.content;
+
+    } catch (error) {
+
+        return "⚠️ AI error aa gaya";
     }
-}
-
-    // Greetings
-    if (msg.includes("hi") || msg.includes("hello"))
-        return "👋 Hello! Kaise ho? 😄";
-
-    if (msg.includes("kaise ho"))
-        return "😎 Main mast hu! Tum kaise ho? 🤗";
-
-    // Name
-    if (msg.includes("tum kon ho"))
-        return "Main Adarsh ka AI Assistant hu 🤖";
-
-    if (msg.includes("mera naam"))
-        return "main Adarsh ke duara banaya gaya ai assistant ho ";
-
-    // Coding
-    if (msg.includes("mujhe coding sekhna hai"))
-        return "Coding daily practice se aati hai 💻";
-
-    // Rich
-    if (msg.includes("rich/bada aadmi kise bane") || msg.includes("paisa"))
-        return "Bada aadmi banne ke liye skills + consistency chahiye 🚀";
-
-    // Elon Musk
-    if (msg.includes("elon musk kon hai"))
-        return "Elon Musk duniya ke top innovators me se ek hai 🚀";
-
-    // Help
-    if (msg.includes("please help me"))
-        return "bilkul main aapki kya help kar sakta hu 🗣️";
-
-    // Time
-    if (msg.includes("time"))
-        return "Mujhe exact time nahi pata 😊";
-
-    // Who made you
-    if (msg.includes("who made you") || msg.includes("kisne banaya"))
-        return "Mujhe Adarsh ne banaya hai 😎";
-
-    // Motivation
-    if (msg.includes("motivate matlab kya hota hai"))
-        return "Never give up  Tum bahut bada kar sakte ho";
-
-    // Bye
-    if (msg.includes("bye"))
-        return "Bye 👋 take care,and hit me up anytime you want to chat or need help be something🚀";
-
-    // Default random replies
-    let replies = [
-        "🤔 Thoda aur clearly pucho",
-        " Samajh nahi aaya",
-        " sorry i couldn't understand 😔",
-        
-        "🤖 Main abhi sirf basic level janta hu"
-    ];
-
-    return replies[Math.floor(Math.random() * replies.length)];
 }
 
 // 🔹 Voice input (MAIN FIX)
