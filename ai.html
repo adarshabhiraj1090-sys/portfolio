@@ -291,7 +291,7 @@ justify-content:center;
 
 <script>
 
-const API_KEY = prompt("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");
+const API_KEY = prompt("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");
 
  let isVoice = false;
 
@@ -373,17 +373,19 @@ async function getReply(msg) {
     try {
 
         let response = await fetch(
-            "https://api.openai.com/v1/chat/completions",
+            https://openrouter.ai/api/v1/chat/completions
             {
                 method: "POST",
 
                 headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${API_KEY}`
-                },
+   "Content-Type": "application/json",
+   "Authorization": `Bearer ${API_KEY}`,
+   "HTTP-Referer": "https://adarshabhiraj1090-sys.github.io",
+   "X-Title": "Adarsh AI"
+                }
 
                 body: JSON.stringify({
-                    model: "gpt-4o-mini",
+                    model: "openai/gpt-3.5-turbo"
 
                     messages: [
                         {
