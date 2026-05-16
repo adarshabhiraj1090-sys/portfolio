@@ -383,7 +383,7 @@ async function getReply(msg) {
                 },
 
                 body: JSON.stringify({
-                    model: "gpt-3.5-turbo",
+                    model: "gpt-4o-mini",
 
                     messages: [
                         {
@@ -407,7 +407,7 @@ async function getReply(msg) {
 
     } catch (error) {
 
-        return "⚠️ AI error aa gaya";
+        return "⚠️ API issue";
     }
 }
 
