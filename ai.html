@@ -1,113 +1,128 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>My AI Chat</title>
+<title>Adarsh AI</title>
 
 <style>
-body {
-    font-family: Arial;
-    background: linear-gradient(135deg, #141e30, #243b55);
-    color: white;
-    margin: 0;
+
+body{
+    font-family:Arial;
+    margin:0;
+    background:linear-gradient(135deg,#141e30,#243b55);
+    color:white;
 }
 
-/* Header */
-h1 {
-    background: black;
-    padding: 15px;
-    margin: 0;
+/* HEADER */
+.header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#111;
+    padding:10px;
 }
 
-/* Chatbox */
-#chatbox {
-    width: 95%;
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 15px;
-    height: 350px;
-    overflow-y: auto;
-    background: rgba(255,255,255,0.05);
-    border-radius: 15px;
+.header img{
+    width:50px;
+    height:50px;
+    border-radius:50%;
 }
 
-/* Messages */
-.user {
-    background: #00bcd4;
-    padding: 8px 12px;
-    border-radius: 15px;
-    display: inline-block;
-    margin: 5px;
-    float: right;
-    clear: both;
-    box-shadow: 0 0 10px rgba(0,255,255,0.5);
+.header h1{
+    margin:0;
+    font-size:22px;
 }
 
-.bot {
-    background: #444;
-    padding: 8px 12px;
-    border-radius: 15px;
-    display: inline-block;
-    margin: 5px;
-    float: left;
-    clear: both;
-    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+.header p{
+    margin:0;
+    color:lightgreen;
+    font-size:12px;
 }
 
- .time{
-    font-size:10px;
-    opacity:0.7;
-    margin-top:4px;
- }
-
-/* Input area */
-.input-area {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: black;
-    padding: 10px;
-}
-
-/* Input box */
-input {
-    width: 60%;
-    padding: 10px;
-    border-radius: 20px;
-    border: none;
-}
-
-/* Buttons */
-button {
-    padding: 10px;
-    border: none;
-    border-radius: 50%;
-    background: cyan;
-    margin: 5px;
-    cursor: pointer;
-}
-
-.message{
-    animation: pop 0.3s ease;
-}
-
-@keyframes pop{
-    from{
-        transform: scale(0.8);
-        opacity:0;
-    }
-    to{
-        transform: scale(1);
-        opacity:1;
-    }
-}
-
+/* STATUS */
 #status{
     color:#00ff99;
+    margin:10px;
     font-size:14px;
-    margin-left:10px;
-    margin-bottom:5px;
 }
 
+/* CHATBOX */
+#chatbox{
+    width:90%;
+    max-width:500px;
+    height:420px;
+    overflow-y:auto;
+    margin:10px auto 120px auto;
+    padding:15px;
+    border-radius:15px;
+    background:rgba(255,255,255,0.05);
+}
+
+/* MESSAGES */
+.user{
+    background:#00bcd4;
+    padding:10px;
+    margin:8px;
+    border-radius:15px;
+    float:right;
+    clear:both;
+    max-width:80%;
+}
+
+.bot{
+    background:#444;
+    padding:10px;
+    margin:8px;
+    border-radius:15px;
+    float:left;
+    clear:both;
+    max-width:80%;
+}
+
+/* INPUT AREA */
+.input-area{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:black;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px;
+}
+
+.input-area input{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:20px;
+}
+
+.input-area button{
+    border:none;
+    padding:10px;
+    border-radius:50%;
+    background:cyan;
+    cursor:pointer;
+}
+
+/* EMOJI */
+#emojiBox{
+    margin-left:10px;
+    font-size:25px;
+}
+
+#emojiBox span{
+    cursor:pointer;
+    margin-right:8px;
+}
+
+/* IMAGE */
+.chat-image{
+    width:200px;
+    border-radius:10px;
+}
+
+/* LIGHT MODE */
 .light-mode{
     background:white;
     color:black;
@@ -122,150 +137,62 @@ button {
     color:black;
 }
 
-.header{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:10px;
-    background:#111;
-}
-
-.header img{
-    width:50px;
-    height:50px;
-    border-radius:50%;
-}
-
-.header h1{
-    margin:0;
-    font-size:20px;
-}
-
-.header p{
-    margin:0;
-    font-size:12px;
-    color:lightgreen;
-}
-
-.chat-image{
-    width:200px;
-    border-radius:10px;
-    margin-top:5px;
-}
-
-#voiceSelect{
-    padding:5px;
-    border-radius:10px;
-    margin:5px;
-    background:cyan;
-    border:none;
-}
-
-#emojiBox span{
-    font-size:25px;
-    cursor:pointer;
-    margin:5px;
-}
-
-#emojiBox{
-display:flex;
-gap:10px;
-margin:10px;
-font-size:25px;
-}
-
-.input-area{
-display:flex;
-align-items:center;
-gap:8px;
-padding:10px;
-flex-wrap:wrap;
-background:black;
-position:fixed;
-bottom:0;
-width:100%;
-}
-
-.input-area input[type="text"]{
-flex:1;
-padding:10px;
-border-radius:20px;
-border:none;
-}
-
-.input-area button{
-border:none;
-padding:10px;
-border-radius:50%;
-background:cyan;
-}
-
-input[type="file"]{
-font-size:11px;
-color:white;
-width:120px;
-}
-
-.upload-btn{
-background:cyan;
-padding:10px;
-border-radius:50%;
-font-size:18px;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-    
 </style>
-
 </head>
 
 <body>
 
+<!-- HEADER -->
 <div class="header">
 
-    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
+<img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
 
-    <div>
-        <h1>Adarsh AI</h1>
-        <p>Smart Assistant 🤖</p>
-    </div>
+<div>
+<h1>Adarsh AI</h1>
+<p>Smart Assistant 🤖</p>
+</div>
 
 </div>
 
+<!-- STATUS -->
 <div id="status">🟢 Online</div>
 
-<button onclick="toggleMode()">🌙 Mode</button>
+<!-- MODE -->
+<button onclick="toggleMode()" style="margin-left:10px;border:none;padding:8px 15px;border-radius:20px;background:cyan;">
+🌙 Mode
+</button>
 
-<select id="voiceSelect">
+<!-- VOICE -->
+<select id="voiceSelect" style="padding:8px;border-radius:10px;background:cyan;border:none;">
 
 <option value="0">🤖 Default</option>
-
 <option value="1">👩 Female</option>
-
 <option value="2">😎 Male</option>
 
 </select>
 
+<!-- CHATBOX -->
 <div id="chatbox"></div>
+
+<!-- EMOJI -->
 <div id="emojiBox">
 
 <span onclick="addEmoji('😀')">😀</span>
-
 <span onclick="addEmoji('😂')">😂</span>
-
 <span onclick="addEmoji('🔥')">🔥</span>
-
 <span onclick="addEmoji('😎')">😎</span>
-
 <span onclick="addEmoji('❤️')">❤️</span>
 
 </div>
 
-
+<!-- INPUT -->
 <div class="input-area">
 
-<input type="text" id="userInput" placeholder="Type message...">
+<input
+type="text"
+id="userInput"
+placeholder="Type message..."
+>
 
 <button onclick="send()">➤</button>
 
@@ -273,133 +200,141 @@ justify-content:center;
 
 <button onclick="clearChat()">🗑️</button>
 
-<button onclick="toggleMode()">🌙</button>
-
-<button onclick="startJarvis()">🤖 Jarvis</button>
-
-<label class="upload-btn">
+<label style="background:cyan;padding:10px;border-radius:50%;cursor:pointer;">
 🖼️
-<input type="file" id="imageInput" accept="image/*" hidden>
-</label>
-
-<label class="upload-btn">
-📸
-<input type="file" id="cameraInput" accept="image/*" capture="environment" hidden>
+<input type="file" id="imageInput" hidden>
 </label>
 
 </div>
 
 <script>
 
-const API_KEY = prompt("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");
+// API KEY
+const API_KEY = prompt("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");
 
- let isVoice = false;
+// LOAD CHAT
+window.onload = function(){
 
-// 🔹 Load chat
-window.onload = function () {
-    let saved = localStorage.getItem("chat");
-    if (saved) {
+    let saved =
+    localStorage.getItem("chat");
+
+    if(saved){
         document.getElementById("chatbox").innerHTML = saved;
+    }
+
+    if(localStorage.getItem("theme") === "light"){
+        document.body.classList.add("light-mode");
     }
 };
 
-if(localStorage.getItem("theme") === "light"){
+// SEND MESSAGE
+async function send(msgFromVoice = ""){
 
-    document.body.classList.add("light-mode");
+    let input =
+    msgFromVoice ||
+    document.getElementById("userInput").value.trim();
 
-}
+    if(input === "") return;
 
-// 🔹 Send message
-async function send(msgFromVoice = "") {
-
-    let input = msgFromVoice || document.getElementById("userInput").value.trim();
-
-    if (input === "") return;
-
-    let chatbox = document.getElementById("chatbox");
+    let chatbox =
+    document.getElementById("chatbox");
 
     // USER MESSAGE
     chatbox.innerHTML += `
-    <div class="user message">
-        You: ${input}
-        </div>
-        `;
+    <div class="user">
+        ${input}
+    </div>
+    `;
 
-    // INPUT CLEAR
     document.getElementById("userInput").value = "";
 
     // TYPING
     chatbox.innerHTML += `
     <div class="bot" id="typing">
         ⏳ Typing...
-    </div>`;
+    </div>
+    `;
 
-    chatbox.scrollTo({
-        top: chatbox.scrollHeight,
-        behavior: "smooth"
-    });
+    scrollDown();
 
-    // BOT REPLY
-    setTimeout(async () => {
+    // AI REPLY
+    setTimeout(async ()=>{
 
         document.getElementById("typing").remove();
 
-        let reply = await getReply(input);
+        let reply =
+        await getReply(input);
 
         chatbox.innerHTML += `
-        <div class="bot message">
-            Bot: ${reply}
+        <div class="bot">
+            ${reply}
         </div>
         `;
 
         if(msgFromVoice){
-    speak(reply);
+            speak(reply);
         }
 
-        chatbox.scrollTo({
-            top: chatbox.scrollHeight,
-            behavior: "smooth"
-        });
+        scrollDown();
 
-        // SAVE CHAT
-        localStorage.setItem("chat", chatbox.innerHTML);
-
-    }, 1000);
-}
-
-// 🔹 Reply logic
-async function getReply(msg) {
-
-    try {
-
-        let response = await fetch(
-            https://openrouter.ai/api/v1/chat/completions
-            {
-                method: "POST",
-
-                headers: {
-   "Content-Type": "application/json",
-   "Authorization": `Bearer ${API_KEY}`,
-   "HTTP-Referer": "https://adarshabhiraj1090-sys.github.io",
-   "X-Title": "Adarsh AI"
-                }
-
-                body: JSON.stringify({
-                    model: "openai/gpt-3.5-turbo"
-
-                    messages: [
-                        {
-                            role: "user",
-                            content: msg
-                        }
-                    ],
-
-                    max_tokens: 100
-                })
-            }
+        localStorage.setItem(
+            "chat",
+            chatbox.innerHTML
         );
 
-        let data = await response.json();
+    },1000);
+}
+
+// GET REPLY
+async function getReply(msg){
+
+    try{
+
+        let response = await fetch(
+        "https://openrouter.ai/api/v1/chat/completions",
+        {
+
+            method:"POST",
+
+            headers:{
+
+                "Content-Type":"application/json",
+
+                "Authorization":
+                `Bearer ${API_KEY}`,
+
+                "HTTP-Referer":
+                "https://adarshabhiraj1090-sys.github.io",
+
+                "X-Title":
+                "Adarsh AI"
+            },
+
+            body:JSON.stringify({
+
+                model:
+                "openai/gpt-3.5-turbo",
+
+                messages:[
+                    {
+                        role:"system",
+                        content:
+                        "You are Adarsh AI Assistant. Reply in Hindi-English."
+                    },
+                    {
+                        role:"user",
+                        content:msg
+                    }
+                ],
+
+                max_tokens:100
+
+            })
+
+        });
+
+        let data =
+        await response.json();
 
         console.log(data);
 
@@ -409,152 +344,125 @@ async function getReply(msg) {
 
         return data.choices[0].message.content;
 
-    } catch (error) {
+    }catch(error){
 
-        return "⚠️ " + error.message;
+        return "⚠️ API Error";
     }
 }
 
-// 🔹 Voice input (MAIN FIX)
-function startVoice() {
+// VOICE INPUT
+function startVoice(){
 
-    isVoice = true;
-    let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    let recognition =
+    new (
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition
+    )();
 
     recognition.lang = "en-IN";
+
     recognition.start();
 
-    recognition.onstart = function () {
+    recognition.onstart = function(){
         alert("🎤 Listening...");
     };
 
-    recognition.onresult = function (event) {
-        let voiceText = event.results[0][0].transcript;
-        send(voiceText); // 👈 direct send
+    recognition.onresult = function(event){
+
+        let text =
+        event.results[0][0].transcript;
+
+        send(text);
     };
 
-    recognition.onerror = function () {
-        alert("Voice error 😢 Try again");
+    recognition.onerror = function(){
+        alert("Voice error 😢");
     };
 }
 
-// 🔹 Voice output
- function speak(text){
+// SPEAK
+function speak(text){
 
     speechSynthesis.cancel();
 
-    let speech = new SpeechSynthesisUtterance(text);
+    let speech =
+    new SpeechSynthesisUtterance(text);
 
-    let voices = window.speechSynthesis.getVoices();
+    let voices =
+    speechSynthesis.getVoices();
 
     let selected =
     document.getElementById("voiceSelect").value;
 
-    // Default
     if(selected == "0"){
         speech.voice = voices[0];
     }
 
-    // Female
     else if(selected == "1"){
 
-        let femaleVoice =
+        let female =
         voices.find(v =>
             v.name.toLowerCase().includes("female") ||
-            v.name.toLowerCase().includes("zira") ||
-            v.name.toLowerCase().includes("samantha")
+            v.name.toLowerCase().includes("zira")
         );
 
-        speech.voice = femaleVoice || voices[1];
+        speech.voice =
+        female || voices[1];
     }
 
-    // Male
     else if(selected == "2"){
 
-        let maleVoice =
+        let male =
         voices.find(v =>
-            v.name.toLowerCase().includes("male") ||
             v.name.toLowerCase().includes("david") ||
             v.name.toLowerCase().includes("alex")
         );
 
-        speech.voice = maleVoice || voices[2];
+        speech.voice =
+        male || voices[2];
     }
 
     speech.rate = 1;
 
     speech.pitch = 1;
 
-    speech.volume = 1;
-
     speechSynthesis.speak(speech);
- }
+}
 
-// 🔹 Clear chat
-function clearChat() {
+// CLEAR CHAT
+function clearChat(){
+
     localStorage.removeItem("chat");
+
     document.getElementById("chatbox").innerHTML = "";
 }
 
-// 🔹 Enter key
-document.getElementById("userInput").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") {
-        send();
-    }
-});
-
-// 🔹 Scroll
-function scrollDown() {
-    let chatbox = document.getElementById("chatbox");
-    chatbox.scrollTo({
-        top: chatbox.scrollHeight,
-        behavior: "smooth"
-    });
-}
-function startJarvis() {
-
-    let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = "en-US"; // या hi-IN
-    recognition.continuous = true;
-
-    recognition.onresult = function(event) {
-        let last = event.results.length - 1;
-        let text = event.results[last][0].transcript;
-
-        document.getElementById("userInput").value = text;
-
-        send(); // auto send
-
-    setTimeout(async () => {
-
-    let reply = await getReply(text);
-
-    speak(reply);
-
-}, 1000);
-    };
-
-    recognition.start();
-}
-let userName = localStorage.getItem("name") || "";
-
-function saveName(msg) {
-    if (msg.includes("my name is")) {
-        userName = msg.split("my name is")[1].trim();
-        localStorage.setItem("name", userName);
-        return `Nice to meet you ${userName} 😊`;
-    }
-}
-
-document.getElementById("userInput")
-.addEventListener("keypress", function(e){
+// ENTER KEY
+document
+.getElementById("userInput")
+.addEventListener("keypress",function(e){
 
     if(e.key === "Enter"){
         send();
     }
-
 });
 
+// SCROLL
+function scrollDown(){
+
+    let chatbox =
+    document.getElementById("chatbox");
+
+    chatbox.scrollTo({
+
+        top:chatbox.scrollHeight,
+
+        behavior:"smooth"
+
+    });
+}
+
+// MODE
 function toggleMode(){
 
     document.body.classList.toggle("light-mode");
@@ -566,22 +474,26 @@ function toggleMode(){
     }else{
 
         localStorage.setItem("theme","dark");
-
     }
-
 }
 
-document.getElementById("imageInput").addEventListener("change", function(){
+// IMAGE UPLOAD
+document
+.getElementById("imageInput")
+.addEventListener("change",function(){
 
-    let file = this.files[0];
+    let file =
+    this.files[0];
 
     if(!file) return;
 
-    let reader = new FileReader();
+    let reader =
+    new FileReader();
 
     reader.onload = function(e){
 
-        let chatbox = document.getElementById("chatbox");
+        let chatbox =
+        document.getElementById("chatbox");
 
         chatbox.innerHTML += `
         <div class="user">
@@ -589,26 +501,22 @@ document.getElementById("imageInput").addEventListener("change", function(){
         </div>
         `;
 
-        chatbox.scrollTo({
-            top: chatbox.scrollHeight,
-            behavior: "smooth"
-        });
+        scrollDown();
 
-        localStorage.setItem("chat", chatbox.innerHTML);
+        localStorage.setItem(
+            "chat",
+            chatbox.innerHTML
+        );
     };
 
     reader.readAsDataURL(file);
 
 });
 
-speechSynthesis.onvoiceschanged = () => {
-    speechSynthesis.getVoices();
-};
-
+// EMOJI
 function addEmoji(emoji){
 
-document.getElementById("userInput").value += emoji;
-
+    document.getElementById("userInput").value += emoji;
 }
 
 </script>
