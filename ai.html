@@ -387,10 +387,6 @@ async function getReply(msg) {
 
                     messages: [
                         {
-                            role: "system",
-                            content: "You are Adarsh AI Assistant. Reply in friendly Hindi-English."
-                        },
-                        {
                             role: "user",
                             content: msg
                         }
@@ -403,14 +399,19 @@ async function getReply(msg) {
 
         let data = await response.json();
 
+        console.log(data);
+
+        if(data.error){
+            return "❌ " + data.error.message;
+        }
+
         return data.choices[0].message.content;
 
     } catch (error) {
 
-        return "⚠️ API issue";
+        return "⚠️ " + error.message;
     }
 }
-
 
 // 🔹 Voice input (MAIN FIX)
 function startVoice() {
