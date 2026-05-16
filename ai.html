@@ -291,7 +291,7 @@ justify-content:center;
 
 <script>
 
-const API_KEY = "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";
+const API_KEY = prompt("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");
 
  let isVoice = false;
 
@@ -522,8 +522,12 @@ function startJarvis() {
 
         send(); // auto send
 
-    setTimeout(() => {
-    speak(getReply(input.value));
+    setTimeout(async () => {
+
+    let reply = await getReply(text);
+
+    speak(reply);
+
 }, 1000);
     };
 
