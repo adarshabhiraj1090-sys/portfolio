@@ -291,7 +291,7 @@ async function getReply(msg){
     try{
 
         let response = await fetch(
-        "https://openrouter.ai/api/v1/chat/completions",
+        "https://adarshabhiraj1090.workers.dev",
         {
 
             method:"POST",
@@ -300,15 +300,9 @@ async function getReply(msg){
 
                 "Content-Type":"application/json",
 
-                "Authorization":
-                `Bearer ${API_KEY}`,
-
-                "HTTP-Referer":
-                "https://adarshabhiraj1090-sys.github.io",
-
-                "X-Title":
-                "Adarsh AI"
-            },
+                headers: {
+  "Content-Type": "application/json"
+},
 
             body:JSON.stringify({
 
