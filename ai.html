@@ -194,7 +194,7 @@ id="userInput"
 placeholder="Type message..."
 >
 
-<button onclick="alert('Button working')">➤</button>
+<button onclick="send()">➤</button>
 
 <button onclick="startVoice()">🎤</button>
 
@@ -209,8 +209,6 @@ placeholder="Type message..."
 
 <script>
 
-// API KEY
-const API_KEY = prompt("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");
 
 // LOAD CHAT
 window.onload = function(){
@@ -291,7 +289,7 @@ async function getReply(msg){
     try{
 
         let response = await fetch(
-        "https://adarshabhiraj1090.workers.dev",
+        "https://adarsh-ai-api.adarshabhiraj1090.workers.dev"
         {
 
             method:"POST",
